@@ -1,164 +1,122 @@
-// ParentCare AI — Mock Site Interactions
+/* 함께 — App Interactions */
 
 document.addEventListener('DOMContentLoaded', () => {
 
-  // ── Sticky nav active link highlighting ──────────────────────────
-  const sections = document.querySelectorAll('section[id]');
-  const navLinks = document.querySelectorAll('.nav__links a');
+  // ── Nav scroll effect ──────────────────────────────────────────────
+  const nav = document.getElementById('nav');
+  const onScroll = () => {
+    nav.classList.toggle('scrolled', window.scrollY > 60);
+  };
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
 
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        navLinks.forEach(a => a.classList.remove('active'));
-        const active = document.querySelector(`.nav__links a[href="#${entry.target.id}"]`);
-        if (active) active.classList.add('active');
-      }
+  // ── Destination selector ───────────────────────────────────────────
+  document.querySelectorAll('.dest').forEach(dest => {
+    dest.addEventListener('click', () => {
+      document.querySelectorAll('.dest').forEach(d => d.classList.remove('dest--active'));
+      dest.classList.add('dest--active');
     });
-  }, { threshold: 0.4 });
-
-  sections.forEach(s => observer.observe(s));
-
-  // ── Animate vital bars on scroll ─────────────────────────────────
-  const vitalBars = document.querySelectorAll('.vital-bar__fill');
-  const barObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.style.width = entry.target.getAttribute('style').match(/width:(\S+)/)?.[1] || '50%';
-      }
-    });
-  }, { threshold: 0.5 });
-  vitalBars.forEach(bar => {
-    const originalWidth = bar.style.width;
-    bar.style.width = '0%';
-    bar.dataset.width = originalWidth;
-    barObserver.observe(bar);
   });
 
-  // Fix: restore widths on intersection
-  const barObserver2 = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.style.width = entry.target.dataset.width;
-      }
-    });
-  }, { threshold: 0.3 });
-  vitalBars.forEach(bar => barObserver2.observe(bar));
-
-  // ── Consent demo interactivity ────────────────────────────────────
-  const consentYes = document.querySelector('.c-yes');
-  const consentNo = document.querySelector('.c-no');
-  const consentAlt = document.querySelector('.c-alt');
-
-  if (consentYes) {
-    consentYes.addEventListener('click', () => {
-      showToast('✅ 동의가 완료됐어요! 예약을 자동으로 진행합니다.');
-    });
-    consentNo.addEventListener('click', () => {
-      showToast('자녀에게 "부모님이 이번엔 괜찮다고 하셨어요" 알림이 전송됩니다.');
-    });
-    consentAlt.addEventListener('click', () => {
-      showToast('📅 다른 날짜 3개를 제안해 드릴게요.');
-    });
-  }
-
-  // ── SOS button animation ──────────────────────────────────────────
-  const sosBtn = document.querySelector('.sos-btn');
-  if (sosBtn) {
-    let holdTimer = null;
-    sosBtn.addEventListener('mousedown', () => {
-      holdTimer = setTimeout(() => {
-        showToast('🚨 SOS 긴급 도움 요청이 발송됩니다!');
+  // ── Travel consent button ──────────────────────────────────────────
+  const consentTrigger = document.querySelector('.consent-trigger');
+  if (consentTrigger) {
+    consentTrigger.addEventListener('click', () => {
+      consentTrigger.textContent = '🎉 예약이 완료됐어요!';
+      consentTrigger.style.background = '#10b981';
+      consentTrigger.disabled = true;
+      showToast('🎉 모든 예약이 자동으로 완료됐어요!');
+      setTimeout(() => {
+        consentTrigger.textContent = '좋아요, 가자! 🎉';
+        consentTrigger.style.background = '';
+        consentTrigger.disabled = false;
       }, 3000);
     });
-    sosBtn.addEventListener('mouseup', () => clearTimeout(holdTimer));
-    sosBtn.addEventListener('mouseleave', () => clearTimeout(holdTimer));
   }
 
-  // ── Scroll-reveal animation ───────────────────────────────────────
-  const revealItems = document.querySelectorAll(
-    '.feature-card, .care-card, .privacy-card, .dispatch-step, .value-item, .plan'
-  );
-
-  const revealObserver = new IntersectionObserver((entries) => {
-    entries.forEach((entry, i) => {
-      if (entry.isIntersecting) {
-        setTimeout(() => {
-          entry.target.style.opacity = '1';
-          entry.target.style.transform = 'translateY(0)';
-        }, (entry.target.dataset.delay || 0));
-        revealObserver.unobserve(entry.target);
-      }
+  // ── Event filter buttons ───────────────────────────────────────────
+  document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('filter-btn--active'));
+      btn.classList.add('filter-btn--active');
     });
-  }, { threshold: 0.1 });
-
-  revealItems.forEach((el, i) => {
-    el.style.opacity = '0';
-    el.style.transform = 'translateY(20px)';
-    el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
-    el.dataset.delay = (i % 4) * 80;
-    revealObserver.observe(el);
   });
 
-  // ── Toast notification helper ─────────────────────────────────────
-  function showToast(msg) {
-    const existing = document.querySelector('.toast');
-    if (existing) existing.remove();
+  // ── "같이 가기 제안" buttons ─────────────────────────────────────
+  document.querySelectorAll('.event-card__actions .btn--dark').forEach(btn => {
+    btn.addEventListener('click', () => {
+      showToast('📱 부모님 앱으로 동의 요청을 보냈어요!');
+    });
+  });
 
+  // ── Store buttons ──────────────────────────────────────────────────
+  document.querySelectorAll('.store-btn').forEach(btn => {
+    btn.addEventListener('click', e => {
+      e.preventDefault();
+      showToast('출시 준비 중이에요. 사전 등록해 주세요!');
+    });
+  });
+
+  // ── Schedule sync demo buttons ─────────────────────────────────────
+  document.querySelectorAll('.sync-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const label = btn.dataset.cal;
+      btn.textContent = '✓ 연동됨';
+      btn.classList.add('synced');
+      showToast(`${label} 캘린더가 연동됐어요!`);
+    });
+  });
+
+  // ── Scroll reveal ──────────────────────────────────────────────────
+  const revealEls = document.querySelectorAll(
+    '.activity-block, .dest, .event-card, .testi-card, .how__step, .stat-item, .plan-item, .sync-card'
+  );
+  const revealObs = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('revealed');
+        revealObs.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+
+  const style = document.createElement('style');
+  style.textContent = `
+    .activity-block, .dest, .event-card, .testi-card, .how__step, .stat-item, .plan-item, .sync-card {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.55s ease, transform 0.55s ease;
+    }
+    .activity-block { transform: none; }
+    .revealed {
+      opacity: 1 !important;
+      transform: translateY(0) !important;
+    }
+    .sync-btn.synced {
+      background: #10b981 !important;
+      color: white !important;
+      border-color: #10b981 !important;
+    }
+  `;
+  document.head.appendChild(style);
+
+  revealEls.forEach((el, i) => {
+    el.style.transitionDelay = `${(i % 4) * 60}ms`;
+    revealObs.observe(el);
+  });
+
+  // ── Toast ──────────────────────────────────────────────────────────
+  function showToast(msg) {
+    const container = document.getElementById('toastContainer');
     const toast = document.createElement('div');
     toast.className = 'toast';
     toast.textContent = msg;
-    toast.style.cssText = `
-      position: fixed;
-      bottom: 32px;
-      left: 50%;
-      transform: translateX(-50%) translateY(20px);
-      background: #1a1a2e;
-      color: white;
-      padding: 12px 24px;
-      border-radius: 99px;
-      font-size: 14px;
-      font-weight: 500;
-      z-index: 9999;
-      box-shadow: 0 8px 32px rgba(0,0,0,0.3);
-      opacity: 0;
-      transition: all 0.3s ease;
-      max-width: 90vw;
-      text-align: center;
-      white-space: nowrap;
-    `;
-    document.body.appendChild(toast);
-
-    requestAnimationFrame(() => {
-      toast.style.opacity = '1';
-      toast.style.transform = 'translateX(-50%) translateY(0)';
-    });
-
+    container.appendChild(toast);
     setTimeout(() => {
-      toast.style.opacity = '0';
-      toast.style.transform = 'translateX(-50%) translateY(10px)';
+      toast.classList.add('out');
       setTimeout(() => toast.remove(), 300);
     }, 3000);
   }
 
-  // ── Download buttons mock ─────────────────────────────────────────
-  document.querySelectorAll('.store-btn').forEach(btn => {
-    btn.addEventListener('click', (e) => {
-      e.preventDefault();
-      showToast('📱 출시 준비 중입니다. 사전 등록해 주세요!');
-    });
-  });
-
-  // ── "무료로 시작하기" smooth interaction ─────────────────────────
-  document.querySelectorAll('a[href="#download"]').forEach(btn => {
-    btn.addEventListener('click', (e) => {
-      e.preventDefault();
-      document.getElementById('download')?.scrollIntoView({ behavior: 'smooth' });
-    });
-  });
-
-  // ── Nav active style injection ────────────────────────────────────
-  const style = document.createElement('style');
-  style.textContent = `.nav__links a.active { color: var(--primary); font-weight: 700; }`;
-  document.head.appendChild(style);
-
+  window.showToast = showToast;
 });
