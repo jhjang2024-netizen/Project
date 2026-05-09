@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ParentCare AI — 부모님 곁에 없어도, 곁에 있는 것처럼</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<!-- ===================== NAV ===================== -->
+<header class="nav">
+  <div class="container nav__inner">
+    <a href="#" class="nav__logo">
+      <span class="logo-icon">💙</span>
+      <span>ParentCare <strong>AI</strong></span>
+    </a>
+    <nav class="nav__links">
+      <a href="#features">주요 기능</a>
+      <a href="#how">이용 방법</a>
+      <a href="#health">건강 모니터링</a>
+      <a href="#emergency">긴급 케어</a>
+      <a href="#pricing">요금제</a>
+    </nav>
+    <div class="nav__cta">
+      <a href="#download" class="btn btn--outline">로그인</a>
+      <a href="#download" class="btn btn--primary">무료로 시작하기</a>
+    </div>
+  </div>
+</header>
+
+<!-- ===================== HERO ===================== -->
+<section class="hero">
+  <div class="container hero__inner">
+    <div class="hero__text">
+      <span class="badge">AI 기반 양방향 부모님 케어</span>
+      <h1>부모님 곁에 없어도,<br /><em>곁에 있는 것처럼</em></h1>
+      <p class="hero__sub">
+        AI가 먼저 케어 기회를 발굴하고, 자녀와 부모님 양측의 동의 하에 자동으로
+        일정·예약·건강을 관리해 드립니다.<br />
+        마음만이 아니라 <strong>행동으로 실천</strong>하는 스마트 케어 플랫폼.
+      </p>
+      <div class="hero__actions">
+        <a href="#download" class="btn btn--primary btn--lg">앱 무료 다운로드</a>
+        <a href="#how" class="btn btn--ghost btn--lg">서비스 둘러보기 →</a>
+      </div>
+      <div class="hero__stats">
+        <div class="stat"><strong>95%</strong><span>이상 감지 정확도</span></div>
+        <div class="stat"><strong>15분</strong><span>케어 인력 파견 목표</span></div>
+        <div class="stat"><strong>90%</strong><span>자동 예약 성공률</span></div>
+      </div>
+    </div>
+    <div class="hero__phones">
+      <div class="phone phone--parent">
+        <div class="phone__screen">
+          <div class="phone__header">
+            <span class="phone__time">9:41</span>
+            <span class="phone__title">어머니 앱</span>
+          </div>
+          <div class="phone__sos">
+            <button class="sos-btn">SOS<br/><small>3초 누르기</small></button>
+          </div>
+          <div class="phone__card card--consent">
+            <div class="card__tag">💬 동의 요청</div>
+            <p>OO이가 이번 주 토요일<br /><strong>낙지골목 같이 가자</strong>고 해요.</p>
+            <div class="consent__actions">
+              <button class="consent__yes">좋아요!</button>
+              <button class="consent__no">다음에</button>
+            </div>
+          </div>
+          <div class="phone__card card--health">
+            <div class="card__tag">❤️ 오늘 건강</div>
+            <div class="vitals">
+              <div class="vital"><span>심박수</span><strong>72 bpm</strong></div>
+              <div class="vital"><span>산소포화도</span><strong>98%</strong></div>
+              <div class="vital"><span>걸음수</span><strong>4,231</strong></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="phone phone--child">
+        <div class="phone__screen">
+          <div class="phone__header">
+            <span class="phone__time">9:41</span>
+            <span class="phone__title">자녀 앱</span>
+          </div>
+          <div class="phone__card card--ai">
+            <div class="card__tag">🤖 AI 추천</div>
+            <p><strong>아버지가 좋아하시는 낙지볶음</strong><br />이번 주 토요일 어때요?</p>
+            <div class="ai__meta">
+              <span>📍 낙지골목 종로점</span>
+              <span>⭐ 재방문 식당</span>
+            </div>
+            <button class="btn btn--primary btn--sm">예약 진행하기</button>
+          </div>
+          <div class="phone__card card--travel">
+            <div class="card__tag">🌊 AI 추천 여행</div>
+            <p><strong>강릉 2박 3일</strong><br />7/19~21 · KTX · 씨마크호텔</p>
+            <div class="travel__cost">예상 비용 <strong>48만원</strong></div>
+          </div>
+          <div class="phone__card card--alert">
+            <div class="card__tag alert">📞 연락 알림</div>
+            <p>부모님께 연락한 지 <strong>5일</strong>이 지났어요.</p>
+            <button class="btn btn--primary btn--sm">지금 바로 전화하기 📞</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="hero__wave">
+    <svg viewBox="0 0 1440 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0 40 C360 80 1080 0 1440 40 L1440 80 L0 80 Z" fill="#f8faff"/>
+    </svg>
+  </div>
+</section>
+
+<!-- ===================== VALUE PROPS ===================== -->
+<section class="values">
+  <div class="container">
+    <div class="values__grid">
+      <div class="value-item"><span>💡</span><p><strong>능동적 케어</strong><br/>AI가 먼저 발굴·제안</p></div>
+      <div class="value-item"><span>🤝</span><p><strong>양방향 동의</strong><br/>양측이 주체적으로 결정</p></div>
+      <div class="value-item"><span>⚡</span><p><strong>자동 실행</strong><br/>동의 후 전자동 완성</p></div>
+      <div class="value-item"><span>❤️</span><p><strong>실시간 안심</strong><br/>이상 징후 즉시 감지</p></div>
+      <div class="value-item"><span>🔒</span><p><strong>사생활 존중</strong><br/>공유 범위 직접 설정</p></div>
+      <div class="value-item"><span>🎯</span><p><strong>맞춤형 동반</strong><br/>정밀하고 세심한 케어</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== FEATURES ===================== -->
+<section class="features" id="features">
+  <div class="container">
+    <div class="section-header">
+      <span class="badge badge--blue">주요 기능</span>
+      <h2>한 앱으로 해결하는<br />모든 부모님 케어</h2>
+      <p>9가지 핵심 기능이 AI로 연결되어 자동으로 케어를 실현합니다.</p>
+    </div>
+
+    <div class="features__grid">
+
+      <div class="feature-card feature-card--wide">
+        <div class="feature-card__icon">🍽️</div>
+        <h3>AI 맛집 추천 &amp; 동행 예약</h3>
+        <p>과거 방문 이력, 선호도, 계절·기념일 컨텍스트를 분석해 최적 외식 일정을 제안하고 양측 동의 시 자동 예약합니다.</p>
+        <ul class="feature-list">
+          <li>과거 방문 식당 이력 분석 (평점·재방문·선호 메뉴)</li>
+          <li>부모님 생신 D-14, 마지막 외식 후 N주 경과 자동 트리거</li>
+          <li>예약 완료 후 캘린더 자동 등록 + 당일 리마인더</li>
+        </ul>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-card__icon">✈️</div>
+        <h3>AI 가족 여행<br />토탈 플래너</h3>
+        <p>여행지·숙소·교통을 패키지로 추천하고, <strong>단 한 번의 동의 버튼</strong>으로 KTX·항공·렌터카까지 전자동 예약합니다.</p>
+        <div class="feature-badge">원버튼 완전 자동</div>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-card__icon">🏨</div>
+        <h3>AI 숙박·여행<br />자동 예약</h3>
+        <p>작년 동일 시즌 예약 패턴을 감지해 같은 펜션·리조트를 사전에 알리고 자동 예약합니다.</p>
+        <div class="feature-badge">가격 비교 자동</div>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-card__icon">📞</div>
+        <h3>원터치 안부전화</h3>
+        <p>마지막 통화 후 N일 경과 시 알림과 함께 <strong>버튼 한 번으로 즉시 전화 연결</strong>. '하려고 했는데 못 했다'를 없앱니다.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-card__icon">🚖</div>
+        <h3>스케줄 공유 &amp;<br />픽업 서비스</h3>
+        <p>부모님이 동의한 일정만 자녀와 공유. 병원 동행 또는 카카오택시 자동 호출로 귀가 안전 확인까지.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-card__icon">👤</div>
+        <h3>맞춤 케어 프로파일</h3>
+        <p>자녀와 부모님이 서로 동의한 정보를 기반으로 AI가 최적 케어 타이밍과 방식을 도출합니다.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-card__icon">🏥</div>
+        <h3>건강 관리 &amp;<br />의료 일정 동반</h3>
+        <p>건강검진 PDF AI 요약 분석, 정기 진료 리마인더, 처방약 복용 관리, 자녀 동행 요청까지 통합 관리.</p>
+      </div>
+
+      <div class="feature-card feature-card--consent">
+        <div class="feature-card__icon">✅</div>
+        <h3>양방향 동의 시스템</h3>
+        <p>모든 자동화는 <strong>자녀와 부모님 양측의 명시적 동의</strong>가 필수. 동의 이력은 투명하게 기록됩니다.</p>
+        <div class="consent-demo">
+          <div class="consent-popup">
+            <p>OO이가 강릉 여행 같이 가자고 해요.</p>
+            <div class="consent-btns">
+              <button class="c-yes active">좋아요, 가자!</button>
+              <button class="c-alt">날짜 바꿔줘</button>
+              <button class="c-no">이번엔 괜찮아</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===================== HOW IT WORKS ===================== -->
+<section class="how" id="how">
+  <div class="container">
+    <div class="section-header">
+      <span class="badge badge--green">이용 방법</span>
+      <h2>이렇게 작동합니다</h2>
+      <p>AI가 모든 과정을 자동으로 처리하고, 여러분은 동의 버튼만 누르면 됩니다.</p>
+    </div>
+
+    <div class="flow">
+      <div class="flow__step">
+        <div class="flow__num">01</div>
+        <div class="flow__content">
+          <h3>AI가 케어 기회 포착</h3>
+          <p>과거 데이터와 컨텍스트를 분석해 최적의 케어 타이밍을 자동 발굴합니다.</p>
+          <div class="flow__example">
+            <span class="chip">부모님 생신 D-14</span>
+            <span class="chip">마지막 외식 3주 경과</span>
+            <span class="chip">작년 여름 여행 패턴 감지</span>
+          </div>
+        </div>
+      </div>
+      <div class="flow__arrow">→</div>
+      <div class="flow__step">
+        <div class="flow__num">02</div>
+        <div class="flow__content">
+          <h3>자녀 앱에 제안 카드</h3>
+          <p>AI가 준비한 맞춤 케어 플랜이 카드 형태로 표시됩니다. 원하면 다른 옵션도 선택 가능합니다.</p>
+        </div>
+      </div>
+      <div class="flow__arrow">→</div>
+      <div class="flow__step">
+        <div class="flow__num">03</div>
+        <div class="flow__content">
+          <h3>부모님 동의 한 번</h3>
+          <p>부모님 앱에 동의 팝업이 전송됩니다. "좋아요!"를 누르면 모든 예약이 자동 실행됩니다.</p>
+        </div>
+      </div>
+      <div class="flow__arrow">→</div>
+      <div class="flow__step">
+        <div class="flow__num">04</div>
+        <div class="flow__content">
+          <h3>예약 완료 &amp; 알림</h3>
+          <p>숙소·교통부터 일정표 생성, 캘린더 등록, 카카오톡 공유까지 전자동 완성됩니다.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== HEALTH MONITORING ===================== -->
+<section class="health" id="health">
+  <div class="container health__inner">
+    <div class="health__text">
+      <span class="badge badge--red">실시간 건강 모니터링</span>
+      <h2>웨어러블로 연결되는<br />실시간 안심</h2>
+      <p>Galaxy Watch, Apple Watch, Fitbit 등 주요 스마트워치와 연동하여 부모님의 바이탈 데이터를 실시간 모니터링합니다. 이상 징후 발생 시 자녀에게 즉시 알림을 전송합니다.</p>
+      <div class="health__features">
+        <div class="h-feat"><span class="h-icon">💓</span><div><strong>심박수 모니터링</strong><p>안정 시·활동 중 심박수 이상 감지</p></div></div>
+        <div class="h-feat"><span class="h-icon">🩸</span><div><strong>산소포화도 (SpO2)</strong><p>90% 미만 시 즉시 긴급 알림</p></div></div>
+        <div class="h-feat"><span class="h-icon">😴</span><div><strong>수면 품질 분석</strong><p>무호흡 패턴 감지 및 주간 리포트</p></div></div>
+        <div class="h-feat"><span class="h-icon">🚶</span><div><strong>낙상 감지</strong><p>장시간 미동 감지 시 긴급 알림</p></div></div>
+      </div>
+      <div class="alert-levels">
+        <h4>심각도 자동 판단</h4>
+        <div class="level level--1"><span>관심</span><p>활동량 30% 이하 → 주의 알림</p></div>
+        <div class="level level--2"><span>주의</span><p>심박수 이상 15분 지속 → 즉시 알림</p></div>
+        <div class="level level--3"><span>경계</span><p>낙상 의심 → 긴급 알림 + 케어 파견 옵션</p></div>
+        <div class="level level--4"><span>긴급</span><p>무반응 30분 → 119 자동 연결 + 케어 자동 파견</p></div>
+      </div>
+    </div>
+    <div class="health__dashboard">
+      <div class="dashboard">
+        <div class="dashboard__header">
+          <strong>어머니 건강 현황</strong>
+          <span class="status-dot status--ok"></span>
+          <span>정상</span>
+        </div>
+        <div class="dashboard__vitals">
+          <div class="vital-card">
+            <div class="vital-icon">💓</div>
+            <div class="vital-value">72<small>bpm</small></div>
+            <div class="vital-label">심박수</div>
+            <div class="vital-bar"><div class="vital-bar__fill" style="width:60%"></div></div>
+          </div>
+          <div class="vital-card">
+            <div class="vital-icon">🫁</div>
+            <div class="vital-value">98<small>%</small></div>
+            <div class="vital-label">산소포화도</div>
+            <div class="vital-bar"><div class="vital-bar__fill" style="width:98%"></div></div>
+          </div>
+          <div class="vital-card">
+            <div class="vital-icon">🌡️</div>
+            <div class="vital-value">36.5<small>°C</small></div>
+            <div class="vital-label">체온</div>
+            <div class="vital-bar"><div class="vital-bar__fill" style="width:72%"></div></div>
+          </div>
+          <div class="vital-card">
+            <div class="vital-icon">🚶</div>
+            <div class="vital-value">4,231<small>보</small></div>
+            <div class="vital-label">걸음수</div>
+            <div class="vital-bar"><div class="vital-bar__fill" style="width:42%"></div></div>
+          </div>
+        </div>
+        <div class="dashboard__chart">
+          <div class="chart-label">주간 심박수 트렌드</div>
+          <svg class="sparkline" viewBox="0 0 280 60" fill="none">
+            <polyline points="0,45 40,35 80,40 120,28 160,38 200,30 240,32 280,25"
+              stroke="#4F6EF7" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            <polyline points="0,45 40,35 80,40 120,28 160,38 200,30 240,32 280,25 280,60 0,60"
+              fill="url(#grad)" opacity="0.15"/>
+            <defs>
+              <linearGradient id="grad" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#4F6EF7"/>
+                <stop offset="100%" stop-color="#4F6EF7" stop-opacity="0"/>
+              </linearGradient>
+            </defs>
+          </svg>
+          <div class="chart-days"><span>월</span><span>화</span><span>수</span><span>목</span><span>금</span><span>토</span><span>일</span></div>
+        </div>
+        <div class="dashboard__report">
+          <div class="report-icon">📋</div>
+          <div>
+            <strong>주간 건강 리포트 도착</strong>
+            <p>이번 주 수면 품질이 지난 주 대비 12% 향상됐어요.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== EMERGENCY CARE ===================== -->
+<section class="emergency" id="emergency">
+  <div class="container">
+    <div class="section-header">
+      <span class="badge badge--orange">긴급 돌봄 연계</span>
+      <h2>멀리 있어도 즉시 달려가는<br />AI 케어 디스패치</h2>
+      <p>건강 이상 감지부터 케어 인력 파견, 병원 동행까지 — 자녀가 원격으로 전 과정을 확인합니다.</p>
+    </div>
+
+    <div class="emergency__layout">
+      <div class="dispatch-flow">
+        <div class="dispatch-step">
+          <div class="dispatch-icon">⌚</div>
+          <h4>이상 신호 감지</h4>
+          <p>웨어러블 또는 SOS 버튼</p>
+        </div>
+        <div class="dispatch-arrow">▼</div>
+        <div class="dispatch-step">
+          <div class="dispatch-icon">🤖</div>
+          <h4>AI 심각도 판단</h4>
+          <p>관심 / 주의 / 경계 / 긴급 4단계</p>
+        </div>
+        <div class="dispatch-arrow">▼</div>
+        <div class="dispatch-step dispatch-step--alert">
+          <div class="dispatch-icon">🔔</div>
+          <h4>자녀 즉시 알림</h4>
+          <p>"어머니 심박수 이상 20분 지속"</p>
+          <div class="dispatch-actions">
+            <button class="btn btn--primary btn--sm">케어 인력 파견</button>
+            <button class="btn btn--outline btn--sm">119 연결</button>
+          </div>
+        </div>
+        <div class="dispatch-arrow">▼</div>
+        <div class="dispatch-step dispatch-step--match">
+          <div class="dispatch-icon">👩‍⚕️</div>
+          <h4>인력 매칭 (15분 목표)</h4>
+          <p>인근 가용 요양보호사·간호사 실시간 매칭</p>
+        </div>
+        <div class="dispatch-arrow">▼</div>
+        <div class="dispatch-step">
+          <div class="dispatch-icon">🏠</div>
+          <h4>방문 &amp; 보고서</h4>
+          <p>상태 확인 → 실시간 보고서 → 병원 동행</p>
+        </div>
+      </div>
+
+      <div class="care-types">
+        <h3>파견 가능 케어 인력</h3>
+        <div class="care-card">
+          <span class="care-icon">🧑‍🦳</span>
+          <div>
+            <strong>방문 요양보호사</strong>
+            <p>댁 방문 상태 확인, 일상 돌봄</p>
+            <span class="price">3~5만원 / 시간</span>
+          </div>
+        </div>
+        <div class="care-card">
+          <span class="care-icon">👩‍⚕️</span>
+          <div>
+            <strong>방문 간호사</strong>
+            <p>활력징후 측정, 응급처치</p>
+            <span class="price">건강 이상 징후 시</span>
+          </div>
+        </div>
+        <div class="care-card">
+          <span class="care-icon">🚗</span>
+          <div>
+            <strong>긴급 동행 매니저</strong>
+            <p>병원 동행, 접수·수납 대리, 귀가</p>
+            <span class="price">8~12만원 / 반나절</span>
+          </div>
+        </div>
+        <div class="care-card">
+          <span class="care-icon">🚑</span>
+          <div>
+            <strong>응급 대응 인력</strong>
+            <p>119 연계, 응급실 동행</p>
+            <span class="price">긴급·위험 단계</span>
+          </div>
+        </div>
+        <div class="care-note">
+          <span>✅</span>
+          <p>모든 케어 인력은 국가자격증 검증 + 신원조회 + 교육 이수 필수</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== PICKUP SERVICE ===================== -->
+<section class="pickup">
+  <div class="container pickup__inner">
+    <div class="pickup__visual">
+      <div class="taxi-card">
+        <div class="taxi-header">
+          <span>🚖</span>
+          <strong>카카오택시 자동 호출</strong>
+          <span class="taxi-status">배차 완료</span>
+        </div>
+        <div class="taxi-route">
+          <div class="route-point">
+            <span class="dot dot--from"></span>
+            <span>롯데백화점 강남점</span>
+          </div>
+          <div class="route-line"></div>
+          <div class="route-point">
+            <span class="dot dot--to"></span>
+            <span>서울 강남구 OO아파트</span>
+          </div>
+        </div>
+        <div class="taxi-info">
+          <span>예상 도착 <strong>3분</strong></span>
+          <span>요금 <strong>~8,200원</strong></span>
+        </div>
+        <div class="taxi-notify">
+          <span>💬</span>
+          <p>어머니 앱: "OO이가 택시를 보냈어요. 3분 후 도착합니다."</p>
+        </div>
+      </div>
+    </div>
+    <div class="pickup__text">
+      <span class="badge badge--yellow">귀가 픽업 서비스</span>
+      <h2>버튼 한 번으로<br />안전한 귀가 확인</h2>
+      <p>부모님 외출 일정이 종료될 때 자녀에게 알림이 가고, 버튼 한 번으로 카카오택시를 자동 호출합니다. 귀가 완료까지 실시간 위치를 공유하고, 귀가 후 자동으로 공유가 종료됩니다.</p>
+      <ul class="pickup__steps">
+        <li><span>1</span>부모님 외출 종료 30분 전 자녀에게 알림</li>
+        <li><span>2</span>[택시 지금 호출] 버튼 → 저장된 주소로 자동 호출</li>
+        <li><span>3</span>부모님 앱 "OO이가 택시를 보냈어요" 알림</li>
+        <li><span>4</span>귀가 완료 감지 → "안전하게 귀가하셨어요" 알림</li>
+        <li><span>5</span>위치 공유 자동 종료 (사생활 보호)</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== PRIVACY ===================== -->
+<section class="privacy">
+  <div class="container">
+    <div class="section-header">
+      <span class="badge badge--gray">사생활 보호</span>
+      <h2>"케어는 하되,<br />감시는 하지 않는다"</h2>
+      <p>모든 공유 범위는 부모님이 직접 설정하고 언제든지 변경할 수 있습니다.</p>
+    </div>
+    <div class="privacy__grid">
+      <div class="privacy-card">
+        <div class="privacy-icon">🎛️</div>
+        <h4>선택적 공유</h4>
+        <p>부모님이 공개할 일정·정보 유형을 직접 선택. 나머지는 자녀에게 완전 비공개.</p>
+      </div>
+      <div class="privacy-card">
+        <div class="privacy-icon">📍</div>
+        <h4>위치 최소화</h4>
+        <p>위치 정보는 택시 이동 중에만 일시 공유. 귀가 완료 후 자동 삭제.</p>
+      </div>
+      <div class="privacy-card">
+        <div class="privacy-icon">🔔</div>
+        <h4>알림 시간 자율 설정</h4>
+        <p>부모님이 알림 수신 가능 시간대를 직접 설정. 원하는 시간에만 연락.</p>
+      </div>
+      <div class="privacy-card">
+        <div class="privacy-icon">📋</div>
+        <h4>동의 이력 투명 공개</h4>
+        <p>자녀가 어떤 정보를 열람했는지 부모님이 확인 가능한 투명한 기록.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== PRICING ===================== -->
+<section class="pricing" id="pricing">
+  <div class="container">
+    <div class="section-header">
+      <span class="badge badge--purple">요금제</span>
+      <h2>합리적인 요금으로<br />시작하세요</h2>
+    </div>
+    <div class="pricing__grid">
+      <div class="plan">
+        <div class="plan__name">베이직</div>
+        <div class="plan__price">무료</div>
+        <div class="plan__period">영구 무료</div>
+        <ul class="plan__features">
+          <li>✅ 가족 계정 연동</li>
+          <li>✅ 양방향 동의 시스템</li>
+          <li>✅ 원터치 안부전화</li>
+          <li>✅ 기본 일정 알림</li>
+          <li>✅ 건강검진 기록 보관</li>
+          <li class="disabled">❌ AI 추천 및 자동 예약</li>
+          <li class="disabled">❌ 실시간 건강 모니터링</li>
+          <li class="disabled">❌ 긴급 케어 디스패치</li>
+        </ul>
+        <a href="#download" class="btn btn--outline btn--full">시작하기</a>
+      </div>
+      <div class="plan plan--featured">
+        <div class="plan__badge">가장 인기</div>
+        <div class="plan__name">케어 플러스</div>
+        <div class="plan__price">9,900<span>원</span></div>
+        <div class="plan__period">월 / 가족 계정</div>
+        <ul class="plan__features">
+          <li>✅ 베이직 모든 기능</li>
+          <li>✅ AI 맛집·여행 추천 및 자동 예약</li>
+          <li>✅ 가족 여행 토탈 플래너</li>
+          <li>✅ 실시간 건강 모니터링</li>
+          <li>✅ 귀가 픽업 서비스 (월 10회)</li>
+          <li>✅ 스케줄 선택 공유</li>
+          <li>✅ 주간 건강 리포트</li>
+          <li class="disabled">❌ 긴급 케어 디스패치</li>
+        </ul>
+        <a href="#download" class="btn btn--primary btn--full">14일 무료 체험</a>
+      </div>
+      <div class="plan">
+        <div class="plan__name">프리미엄 케어</div>
+        <div class="plan__price">29,900<span>원</span></div>
+        <div class="plan__period">월 / 가족 계정</div>
+        <ul class="plan__features">
+          <li>✅ 케어 플러스 모든 기능</li>
+          <li>✅ 긴급 케어 디스패치</li>
+          <li>✅ 방문 케어 월 1회 포함</li>
+          <li>✅ 24시간 SOS 긴급 대응</li>
+          <li>✅ 병원 동행 서비스 연동</li>
+          <li>✅ 처방약 복용 관리</li>
+          <li>✅ AI 말동무 기능 (베타)</li>
+          <li>✅ 전담 케어 매니저 배정</li>
+        </ul>
+        <a href="#download" class="btn btn--outline btn--full">상담 신청</a>
+      </div>
+    </div>
+
+    <div class="public-connect">
+      <div class="public-icon">🏥</div>
+      <div>
+        <h4>보건소 무료 스마트워치 지원 사업과 연계됩니다</h4>
+        <p>만 65세 이상 부모님이 계신가요? 지역 보건소에서 무료로 스마트워치를 받고 ParentCare AI와 연동해 보세요. 앱 설치 후 지원 가능 여부를 바로 확인할 수 있습니다.</p>
+      </div>
+      <a href="#download" class="btn btn--outline">지원 여부 확인</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== DOWNLOAD ===================== -->
+<section class="download" id="download">
+  <div class="container download__inner">
+    <div class="download__text">
+      <h2>지금 바로 시작하세요</h2>
+      <p>자녀와 부모님 모두 앱을 설치하고 가족 계정을 연동하면, AI가 즉시 케어를 시작합니다.</p>
+      <div class="store-btns">
+        <a href="#" class="store-btn">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+          <div><small>App Store</small><strong>iOS 다운로드</strong></div>
+        </a>
+        <a href="#" class="store-btn">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M3.18 23.76c.3.17.64.25 1 .22l12.44-7.18L13.5 13.7l-10.32 10.06zm15.48-9.47L15.8 12l2.88-2.28L20.82 12l-2.16 2.29zm-1.62.94L4.58.47C4.28.3 3.94.22 3.59.25L13.5 10.3l3.54-3.54v-.01L17.04 15.23zM3.59.25C3.23.22 2.88.3 2.58.48 2.03.8 1.68 1.4 1.68 2.05v19.9c0 .65.35 1.25.9 1.57l.28.16L14.5 13.2 3.59.25z"/></svg>
+          <div><small>Google Play</small><strong>Android 다운로드</strong></div>
+        </a>
+      </div>
+    </div>
+    <div class="download__qr">
+      <div class="qr-mock">
+        <div class="qr-inner">
+          <svg viewBox="0 0 100 100" width="100" height="100">
+            <rect x="10" y="10" width="30" height="30" rx="3" fill="#1a1a2e"/>
+            <rect x="15" y="15" width="20" height="20" rx="2" fill="white"/>
+            <rect x="19" y="19" width="12" height="12" rx="1" fill="#1a1a2e"/>
+            <rect x="60" y="10" width="30" height="30" rx="3" fill="#1a1a2e"/>
+            <rect x="65" y="15" width="20" height="20" rx="2" fill="white"/>
+            <rect x="69" y="19" width="12" height="12" rx="1" fill="#1a1a2e"/>
+            <rect x="10" y="60" width="30" height="30" rx="3" fill="#1a1a2e"/>
+            <rect x="15" y="65" width="20" height="20" rx="2" fill="white"/>
+            <rect x="19" y="69" width="12" height="12" rx="1" fill="#1a1a2e"/>
+            <rect x="50" y="50" width="8" height="8" fill="#1a1a2e"/>
+            <rect x="62" y="50" width="8" height="8" fill="#1a1a2e"/>
+            <rect x="74" y="50" width="8" height="8" fill="#1a1a2e"/>
+            <rect x="86" y="50" width="8" height="8" fill="#1a1a2e"/>
+            <rect x="50" y="62" width="8" height="8" fill="#1a1a2e"/>
+            <rect x="74" y="62" width="8" height="8" fill="#1a1a2e"/>
+            <rect x="50" y="74" width="8" height="8" fill="#1a1a2e"/>
+            <rect x="62" y="74" width="8" height="8" fill="#1a1a2e"/>
+            <rect x="86" y="74" width="8" height="8" fill="#1a1a2e"/>
+            <rect x="50" y="86" width="8" height="8" fill="#1a1a2e"/>
+            <rect x="74" y="86" width="8" height="8" fill="#1a1a2e"/>
+          </svg>
+        </div>
+        <p>QR 코드로 다운로드</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== FOOTER ===================== -->
+<footer class="footer">
+  <div class="container footer__inner">
+    <div class="footer__brand">
+      <span class="logo-icon">💙</span>
+      <strong>ParentCare AI</strong>
+      <p>부모님 곁에 없어도, 곁에 있는 것처럼</p>
+    </div>
+    <div class="footer__links">
+      <div class="footer__col">
+        <h5>서비스</h5>
+        <a href="#">AI 맛집 추천</a>
+        <a href="#">가족 여행 플래너</a>
+        <a href="#">건강 모니터링</a>
+        <a href="#">긴급 케어 디스패치</a>
+      </div>
+      <div class="footer__col">
+        <h5>요금제</h5>
+        <a href="#">베이직 (무료)</a>
+        <a href="#">케어 플러스</a>
+        <a href="#">프리미엄 케어</a>
+        <a href="#">기업·기관 문의</a>
+      </div>
+      <div class="footer__col">
+        <h5>지원</h5>
+        <a href="#">자주 묻는 질문</a>
+        <a href="#">이용 가이드</a>
+        <a href="#">고객센터</a>
+        <a href="#">보건소 워치 지원 안내</a>
+      </div>
+      <div class="footer__col">
+        <h5>법적 고지</h5>
+        <a href="#">개인정보처리방침</a>
+        <a href="#">이용약관</a>
+        <a href="#">건강정보 취급방침</a>
+      </div>
+    </div>
+  </div>
+  <div class="footer__bottom">
+    <div class="container">
+      <p>© 2026 ParentCare AI. All rights reserved. | 본 서비스는 의료 서비스를 대체하지 않습니다.</p>
+    </div>
+  </div>
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>
