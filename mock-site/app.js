@@ -10,6 +10,26 @@ document.addEventListener('DOMContentLoaded', () => {
   window.addEventListener('scroll', onScroll, { passive: true });
   onScroll();
 
+  // ── 햄버거 메뉴 ────────────────────────────────────────────────────
+  const hamburger = document.getElementById('navHamburger');
+  const navLinks  = document.getElementById('navLinks');
+  function closeMenu() {
+    hamburger.classList.remove('is-open');
+    navLinks.classList.remove('is-open');
+    hamburger.setAttribute('aria-expanded', 'false');
+    hamburger.setAttribute('aria-label', '메뉴 열기');
+    document.body.style.overflow = '';
+  }
+  hamburger.addEventListener('click', () => {
+    const open = navLinks.classList.toggle('is-open');
+    hamburger.classList.toggle('is-open', open);
+    hamburger.setAttribute('aria-expanded', String(open));
+    hamburger.setAttribute('aria-label', open ? '메뉴 닫기' : '메뉴 열기');
+    document.body.style.overflow = open ? 'hidden' : '';
+  });
+  navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMenu));
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeMenu(); });
+
   // ── Destination selector ───────────────────────────────────────────
   document.querySelectorAll('.dest').forEach(dest => {
     dest.addEventListener('click', () => {
@@ -160,8 +180,9 @@ document.addEventListener('DOMContentLoaded', () => {
   `;
   document.head.appendChild(style);
 
-  revealEls.forEach((el, i) => {
-    el.style.transitionDelay = `${(i % 4) * 60}ms`;
+  revealEls.forEach(el => {
+    const localIndex = Array.from(el.parentElement.children).indexOf(el);
+    el.style.transitionDelay = `${(localIndex % 4) * 60}ms`;
     revealObs.observe(el);
   });
 
