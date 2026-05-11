@@ -375,7 +375,12 @@ img { display: block; max-width: 100%; }
 .activity { background: var(--white); }
 
 .activity__header {
-  padding: 100px max(48px, calc((100vw - 1280px) / 2 + 48px)) 60px;
+  width: 100%;
+  box-sizing: border-box;
+  padding-top: 100px;
+  padding-bottom: 60px;
+  padding-left: max(48px, calc((100vw - 1280px) / 2 + 48px));
+  padding-right: max(48px, calc((100vw - 1280px) / 2 + 48px));
 }
 .activity__header h2 {
   font-size: clamp(32px, 4vw, 52px);
@@ -1056,12 +1061,14 @@ img { display: block; max-width: 100%; }
 }
 .all-services__header .section-label { color: rgba(255,255,255,0.4); }
 .all-services__header h2 {
-  font-size: clamp(36px, 4.5vw, 60px);
+  font-size: clamp(28px, 3.5vw, 52px);
   font-weight: 900;
   letter-spacing: -0.03em;
-  line-height: 1.15;
+  line-height: 1.2;
   margin: 10px 0 16px;
   color: white;
+  white-space: normal;
+  word-break: keep-all;
 }
 .all-services__header > p {
   font-size: 18px;
