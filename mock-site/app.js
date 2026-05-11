@@ -57,58 +57,55 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // ── 안부 전화 팝업 ──────────────────────────────────────────────────
+  // ── 안부 전화 팝업 (자동 팝업 알림 체험) ────────────────────────────
   const callOverlay  = document.getElementById('callPopupOverlay');
   const openTriggers = [document.getElementById('openCallPopup'), document.getElementById('openCallPopupBtn')];
   const closeBtn     = document.getElementById('closeCallPopup');
-  const callStatus   = document.getElementById('callStatus');
-  const callWaves    = document.getElementById('callWaves');
-  const messages     = ['msg1','msg2','msg3','msg4'].map(id => document.getElementById(id));
-  const callReport   = document.getElementById('callReport');
+  const screenAlert  = document.getElementById('screenAlert');
+  const screenCalling = document.getElementById('screenCalling');
+  const screenDone   = document.getElementById('screenDone');
+  const btnCallNow   = document.getElementById('btnCallNow');
+  const btnCallLater = document.getElementById('btnCallLater');
+  const btnEndCall   = document.getElementById('btnEndCall');
   const callCta      = document.getElementById('callCta');
 
   let callTimers = [];
+  const t = (ms, fn) => callTimers.push(setTimeout(fn, ms));
+
+  function showScreen(screen) {
+    [screenAlert, screenCalling, screenDone].forEach(s => s.classList.add('hidden'));
+    screen.classList.remove('hidden');
+  }
 
   function openCallPopup() {
     callOverlay.classList.add('is-open');
     callOverlay.setAttribute('aria-hidden', 'false');
     document.body.style.overflow = 'hidden';
-    resetCall();
-    runCallSequence();
+    callTimers.forEach(clearTimeout); callTimers = [];
+    showScreen(screenAlert);
   }
 
   function closeCallPopup() {
     callOverlay.classList.remove('is-open');
     callOverlay.setAttribute('aria-hidden', 'true');
     document.body.style.overflow = '';
-    callTimers.forEach(clearTimeout);
-    callTimers = [];
+    callTimers.forEach(clearTimeout); callTimers = [];
   }
 
-  function resetCall() {
-    callStatus.textContent = 'AI 안부 전화 연결 중...';
-    callWaves.classList.remove('paused');
-    messages.forEach(m => m.classList.add('hidden'));
-    callReport.classList.add('hidden');
-    callCta.classList.add('hidden');
-  }
+  // "지금 전화하기" → 전화 연결 화면 → 2.5초 후 완료 화면
+  btnCallNow.addEventListener('click', () => {
+    showScreen(screenCalling);
+    t(2500, () => showScreen(screenDone));
+  });
 
-  function runCallSequence() {
-    const t = (ms, fn) => { callTimers.push(setTimeout(fn, ms)); };
-    t(800,  () => { callStatus.textContent = '통화 중 · 00:01'; });
-    t(1400, () => messages[0].classList.remove('hidden'));
-    t(2800, () => messages[1].classList.remove('hidden'));
-    t(4200, () => messages[2].classList.remove('hidden'));
-    t(5600, () => messages[3].classList.remove('hidden'));
-    t(7000, () => {
-      callStatus.textContent = '통화 종료 · 00:42';
-      callWaves.classList.add('paused');
-    });
-    t(7600, () => {
-      callReport.classList.remove('hidden');
-      callCta.classList.remove('hidden');
-    });
-  }
+  // "10분 후 다시 알림" → 알림 토스트 후 닫기
+  btnCallLater.addEventListener('click', () => {
+    closeCallPopup();
+    showToast('10분 후에 다시 알려드릴게요 🔔');
+  });
+
+  // 전화 종료 버튼
+  btnEndCall.addEventListener('click', () => showScreen(screenAlert));
 
   openTriggers.forEach(el => el && el.addEventListener('click', openCallPopup));
   closeBtn.addEventListener('click', closeCallPopup);
