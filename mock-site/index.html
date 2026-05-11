@@ -29,6 +29,7 @@
       <a href="#health-care">건강 동반</a>
       <a href="#all-services">전체 서비스</a>
       <a href="#how">이용 방법</a>
+      <a href="#pricing">요금제</a>
     </nav>
     <div class="nav__cta">
       <a href="#download" class="btn btn--ghost-dark">로그인</a>
@@ -449,49 +450,37 @@
       </div>
     </div>
 
-    <div class="travel__plan-card">
+    <div class="travel__plan-card" id="travelPlanCard">
       <div class="plan-card__header">
         <span>🤖 AI가 준비한 여행 플랜</span>
         <span class="plan-tag">원버튼 완전 자동</span>
       </div>
       <div class="plan-card__dest">
-        <div class="plan-dest-img plan-dest-img--gangneung"></div>
+        <div class="plan-dest-img plan-dest-img--gangneung" id="planDestImg"></div>
         <div>
-          <strong>강릉 경포대 2박 3일</strong>
-          <p>7월 19일(토) ~ 21일(월)</p>
+          <strong id="planDestTitle">강릉 경포대 2박 3일</strong>
+          <p id="planDestDates">7월 19일(토) ~ 21일(월)</p>
         </div>
       </div>
-      <div class="plan-card__items">
+      <div class="plan-card__items" id="planItems">
         <div class="plan-item plan-item--done">
           <span class="plan-icon">🚆</span>
-          <div>
-            <strong>KTX 서울→강릉 왕복</strong>
-            <p>7/19 08:00 출발 · 좌석 예약 완료</p>
-          </div>
+          <div><strong>KTX 서울→강릉 왕복</strong><p>7/19 08:00 출발 · 좌석 예약 완료</p></div>
           <span class="plan-check">✓</span>
         </div>
         <div class="plan-item plan-item--done">
           <span class="plan-icon">🏨</span>
-          <div>
-            <strong>씨마크호텔 2박</strong>
-            <p>오션뷰 디럭스 · 작년보다 12% 저렴</p>
-          </div>
+          <div><strong>씨마크호텔 2박</strong><p>오션뷰 디럭스 · 작년보다 12% 저렴</p></div>
           <span class="plan-check">✓</span>
         </div>
         <div class="plan-item plan-item--done">
           <span class="plan-icon">🍽️</span>
-          <div>
-            <strong>경포맛집 코스 3곳</strong>
-            <p>아버지 선호 한식 위주 추천</p>
-          </div>
+          <div><strong>경포맛집 코스 3곳</strong><p>아버지 선호 한식 위주 추천</p></div>
           <span class="plan-check">✓</span>
         </div>
         <div class="plan-item plan-item--done">
           <span class="plan-icon">🗺️</span>
-          <div>
-            <strong>여행 일정표 자동 생성</strong>
-            <p>날씨 예보 · 준비물 체크리스트 포함</p>
-          </div>
+          <div><strong>여행 일정표 자동 생성</strong><p>날씨 예보 · 준비물 체크리스트 포함</p></div>
           <span class="plan-check">✓</span>
         </div>
       </div>
@@ -503,7 +492,7 @@
       </div>
       <div class="plan-card__total">
         <span>총 예상 비용</span>
-        <strong>48만원</strong>
+        <strong id="planTotal">48만원</strong>
         <span class="per-person">성인 3인 기준</span>
       </div>
     </div>
@@ -526,7 +515,7 @@
       </div>
     </div>
     <div class="events__feed">
-      <div class="event-card event-card--featured">
+      <div class="event-card event-card--featured" data-cat="축제">
         <div class="event-card__img event-img--festival"></div>
         <div class="event-card__body">
           <div class="event-card__meta">
@@ -541,7 +530,7 @@
           </div>
         </div>
       </div>
-      <div class="event-card">
+      <div class="event-card" data-cat="시장·마켓">
         <div class="event-card__img event-img--market"></div>
         <div class="event-card__body">
           <span class="event-tag event-tag--market">마켓</span>
@@ -549,7 +538,7 @@
           <p>매주 토요일 · 성수동</p>
         </div>
       </div>
-      <div class="event-card">
+      <div class="event-card" data-cat="전시">
         <div class="event-card__img event-img--exhibit"></div>
         <div class="event-card__body">
           <span class="event-tag event-tag--exhibit">전시</span>
@@ -557,7 +546,7 @@
           <p>~7/31 · 예술의전당</p>
         </div>
       </div>
-      <div class="event-card">
+      <div class="event-card" data-cat="클래식">
         <div class="event-card__img event-img--classic"></div>
         <div class="event-card__body">
           <span class="event-tag event-tag--classic">클래식</span>
@@ -565,7 +554,7 @@
           <p>6월 매주 일요일 · 올림픽공원</p>
         </div>
       </div>
-      <div class="event-card">
+      <div class="event-card" data-cat="시장·마켓">
         <div class="event-card__img event-img--food"></div>
         <div class="event-card__body">
           <span class="event-tag event-tag--market">푸드</span>
@@ -649,6 +638,89 @@
       <h3>전자동으로 완성</h3>
       <p>예매·예약이 자동 완료되고, 두 분 캘린더에 일정이 등록됩니다. 당일 리마인더도 자동으로.</p>
     </div>
+  </div>
+</section>
+
+<!-- ===================== APP SCREENSHOTS ===================== -->
+<section class="screenshots" id="screenshots">
+  <div class="screenshots__header">
+    <span class="section-label">앱 미리보기</span>
+    <h2>함께 앱을<br />미리 만나보세요</h2>
+    <p>실제 앱과 동일한 화면입니다</p>
+  </div>
+  <div class="screenshots__track" id="screenshotsTrack">
+    <div class="screenshot-slide active">
+      <div class="screenshot-phone">
+        <div class="ss-screen ss-screen--home">
+          <div class="ss-header"><strong>함께</strong><span>✨ 추천 3개</span></div>
+          <div class="ss-card"><span class="ss-tag">🎬 영화</span><strong>파묘</strong><p>아버지 취향 94% 일치</p></div>
+          <div class="ss-card"><span class="ss-tag">🎭 공연</span><strong>레미제라블</strong><p>6/14 · R석 잔여 12석</p></div>
+          <div class="ss-card"><span class="ss-tag">✈️ 여행</span><strong>강릉 경포대</strong><p>7월 추천 · 예상 48만원</p></div>
+        </div>
+      </div>
+      <p class="screenshot-label">AI 맞춤 활동 추천</p>
+      <p class="screenshot-desc">두 분의 취향과 일정을 분석해<br />매일 새로운 활동을 제안합니다</p>
+    </div>
+    <div class="screenshot-slide">
+      <div class="screenshot-phone">
+        <div class="ss-screen ss-screen--health">
+          <div class="ss-header"><strong>건강 현황</strong><span>오전 9:41</span></div>
+          <div class="ss-health-row"><span>❤️ 심박수</span><strong class="ss-ok">72 bpm · 정상</strong></div>
+          <div class="ss-health-row"><span>🩸 산소포화도</span><strong class="ss-ok">98%</strong></div>
+          <div class="ss-health-row"><span>👟 걸음수</span><strong>4,231보</strong></div>
+          <div class="ss-health-row"><span>😴 수면</span><strong class="ss-ok">7시간 21분</strong></div>
+          <div class="ss-health-alert ok">✓ 오늘 어머니 건강 모두 정상</div>
+        </div>
+      </div>
+      <p class="screenshot-label">실시간 건강 모니터링</p>
+      <p class="screenshot-desc">24시간 스마트워치 데이터를<br />자녀 앱에서 실시간 확인합니다</p>
+    </div>
+    <div class="screenshot-slide">
+      <div class="screenshot-phone">
+        <div class="ss-screen ss-screen--consent">
+          <div class="ss-header"><strong>동의 요청 도착</strong><span></span></div>
+          <div class="ss-consent-msg">OO이가 강릉 여행 같이 가자고 해요 🏖️</div>
+          <div class="ss-plan-list">
+            <div class="ss-plan-item">🚆 KTX 서울→강릉 왕복</div>
+            <div class="ss-plan-item">🏨 씨마크호텔 2박</div>
+            <div class="ss-plan-item">🍽️ 경포 맛집 3곳</div>
+          </div>
+          <div class="ss-consent-btns">
+            <button class="ss-btn-yes">좋아요! 🎉</button>
+            <button class="ss-btn-no">다음에</button>
+          </div>
+        </div>
+      </div>
+      <p class="screenshot-label">양방향 동의 시스템</p>
+      <p class="screenshot-desc">모든 예약은 부모님이 직접<br />"좋아요"를 눌러야만 진행됩니다</p>
+    </div>
+    <div class="screenshot-slide">
+      <div class="screenshot-phone">
+        <div class="ss-screen ss-screen--taxi">
+          <div class="ss-header"><strong>카카오택시 호출</strong><span>대리 호출</span></div>
+          <div class="ss-taxi-route">
+            <div class="ss-taxi-point"><span class="ss-dot-b">●</span>롯데백화점 강남점</div>
+            <div class="ss-taxi-line"></div>
+            <div class="ss-taxi-point"><span class="ss-dot-r">●</span>강남구 OO아파트</div>
+          </div>
+          <div class="ss-taxi-info">예상 요금 <strong>~8,200원</strong> · 배차 <strong>3분</strong></div>
+          <button class="ss-taxi-btn">어머니 택시 호출하기</button>
+          <p class="ss-taxi-note">부모님 앱 없이 자녀가 직접 호출</p>
+        </div>
+      </div>
+      <p class="screenshot-label">카카오택시 대리 호출</p>
+      <p class="screenshot-desc">부모님이 앱을 설치하지 않아도<br />자녀가 직접 택시를 불러드립니다</p>
+    </div>
+  </div>
+  <div class="screenshots__nav">
+    <button class="ss-arrow ss-arrow--prev" id="ssPrev" aria-label="이전">←</button>
+    <div class="screenshots__dots" id="screenshotsDots">
+      <button class="ss-dot ss-dot--active" data-idx="0"></button>
+      <button class="ss-dot" data-idx="1"></button>
+      <button class="ss-dot" data-idx="2"></button>
+      <button class="ss-dot" data-idx="3"></button>
+    </div>
+    <button class="ss-arrow ss-arrow--next" id="ssNext" aria-label="다음">→</button>
   </div>
 </section>
 
@@ -917,6 +989,7 @@
         <span class="sb__dot sb__dot--r"></span><span>강남구 OO아파트</span>
         <div class="sb__route-meta">도착 <b>3분</b> · 요금 <b>~8,200원</b></div>
       </div>
+      <button class="sb__taxi-btn" id="kakaoTaxiDemo">어머니 택시 지금 호출하기 🚖</button>
       <div class="sb__orb sb__orb--y"></div>
     </div>
 
@@ -1050,6 +1123,37 @@
   </div>
 </section>
 
+<!-- ===================== PARTNERS ===================== -->
+<section class="partners">
+  <div class="partners__inner">
+    <p class="partners__label">연동 파트너</p>
+    <div class="partners__track">
+      <div class="partners__logos">
+        <div class="partner-item"><span class="partner-name">카카오</span></div>
+        <div class="partner-item"><span class="partner-name">CGV</span></div>
+        <div class="partner-item"><span class="partner-name">인터파크</span></div>
+        <div class="partner-item"><span class="partner-name">코레일 KTX</span></div>
+        <div class="partner-item"><span class="partner-name">야놀자</span></div>
+        <div class="partner-item"><span class="partner-name">네이버 예약</span></div>
+        <div class="partner-item"><span class="partner-name">Apple 헬스</span></div>
+        <div class="partner-item"><span class="partner-name">삼성 헬스</span></div>
+        <div class="partner-item"><span class="partner-name">구글 캘린더</span></div>
+        <div class="partner-item"><span class="partner-name">카카오 캘린더</span></div>
+        <div class="partner-item"><span class="partner-name">카카오</span></div>
+        <div class="partner-item"><span class="partner-name">CGV</span></div>
+        <div class="partner-item"><span class="partner-name">인터파크</span></div>
+        <div class="partner-item"><span class="partner-name">코레일 KTX</span></div>
+        <div class="partner-item"><span class="partner-name">야놀자</span></div>
+        <div class="partner-item"><span class="partner-name">네이버 예약</span></div>
+        <div class="partner-item"><span class="partner-name">Apple 헬스</span></div>
+        <div class="partner-item"><span class="partner-name">삼성 헬스</span></div>
+        <div class="partner-item"><span class="partner-name">구글 캘린더</span></div>
+        <div class="partner-item"><span class="partner-name">카카오 캘린더</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ===================== TESTIMONIALS ===================== -->
 <section class="testimonials">
   <div class="testimonials__header">
@@ -1152,6 +1256,87 @@
       </div>
       <div class="testi-activity">🎭 뮤지컬 + 저녁 식사</div>
     </div>
+  </div>
+</section>
+
+<!-- ===================== PRICING ===================== -->
+<section class="pricing" id="pricing">
+  <div class="pricing__header">
+    <span class="section-label">요금제</span>
+    <h2>투명한 가격,<br />합리적인 선택</h2>
+    <p>핵심 기능은 영구 무료 · 가족과 함께 시작하세요</p>
+  </div>
+  <div class="pricing__grid">
+
+    <div class="pricing-card pricing-card--free">
+      <div class="pricing-card__top">
+        <span class="pricing-tier">무료</span>
+        <div class="pricing-price"><strong>₩0</strong><span> / 월</span></div>
+        <p class="pricing-sub">핵심 기능 영구 무료</p>
+      </div>
+      <ul class="pricing-features">
+        <li class="on">AI 활동 추천 월 5회</li>
+        <li class="on">안부 전화 팝업 알림</li>
+        <li class="on">캘린더 연동 1개</li>
+        <li class="on">동네 행사 알림</li>
+        <li class="off">여행 자동 예약</li>
+        <li class="off">건강 모니터링</li>
+        <li class="off">긴급 돌봄 연계</li>
+      </ul>
+      <a href="#download" class="btn btn--outline-dark">무료로 시작하기</a>
+    </div>
+
+    <div class="pricing-card pricing-card--premium">
+      <div class="pricing-badge">가장 인기</div>
+      <div class="pricing-card__top">
+        <span class="pricing-tier">프리미엄</span>
+        <div class="pricing-price"><strong>₩9,900</strong><span> / 월</span></div>
+        <p class="pricing-sub">가족 1팀 (부모님 포함)</p>
+      </div>
+      <ul class="pricing-features">
+        <li class="on">AI 활동 추천 무제한</li>
+        <li class="on">안부 전화 팝업 알림</li>
+        <li class="on">캘린더 연동 무제한</li>
+        <li class="on">동네 행사 알림</li>
+        <li class="on">여행 자동 예약</li>
+        <li class="on">건강 모니터링 (스마트워치)</li>
+        <li class="on">카카오택시 대리 호출</li>
+      </ul>
+      <a href="#download" class="btn btn--dark">프리미엄 시작하기</a>
+    </div>
+
+    <div class="pricing-card pricing-card--family">
+      <div class="pricing-card__top">
+        <span class="pricing-tier">패밀리</span>
+        <div class="pricing-price"><strong>₩15,900</strong><span> / 월</span></div>
+        <p class="pricing-sub">부모님 2팀 + 형제자매 공유</p>
+      </div>
+      <ul class="pricing-features">
+        <li class="on">프리미엄 전체 포함</li>
+        <li class="on">부모님 2팀 연결</li>
+        <li class="on">형제자매 공유 (3명)</li>
+        <li class="on">긴급 돌봄 연계 (월 1회)</li>
+        <li class="on">전담 케어 매니저</li>
+        <li class="on">연간 가족 리포트</li>
+        <li class="on">우선 고객지원</li>
+      </ul>
+      <a href="#download" class="btn btn--outline-dark">패밀리 시작하기</a>
+    </div>
+
+  </div>
+</section>
+
+<!-- ===================== WAITLIST ===================== -->
+<section class="waitlist" id="waitlist">
+  <div class="waitlist__inner">
+    <span class="section-label section-label--light">사전 등록</span>
+    <h2>출시 전 미리 등록하고<br />특별 혜택을 받으세요</h2>
+    <p class="waitlist__sub">사전 등록자에게는 출시 즉시 <strong>3개월 프리미엄 무료</strong> +<br />얼리버드 가격이 적용됩니다.</p>
+    <form class="waitlist__form" id="waitlistForm" novalidate>
+      <input type="email" class="waitlist__input" placeholder="이메일 주소를 입력해 주세요" required />
+      <button type="submit" class="btn btn--cream btn--lg">사전 등록하기</button>
+    </form>
+    <p class="waitlist__note">현재 <strong id="waitlistCount">4,280명</strong>이 사전 등록했습니다 · 스팸 없음 · 언제든 취소 가능</p>
   </div>
 </section>
 
