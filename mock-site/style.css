@@ -1010,7 +1010,12 @@ blockquote {
   padding: 100px 0;
 }
 .travel__header {
-  padding: 0 max(48px, calc((100vw - 1280px) / 2 + 48px)) 60px;
+  width: 100%;
+  box-sizing: border-box;
+  padding-top: 0;
+  padding-bottom: 60px;
+  padding-left: max(48px, calc((100vw - 1280px) / 2 + 48px));
+  padding-right: max(48px, calc((100vw - 1280px) / 2 + 48px));
 }
 .travel__header h2 {
   font-size: clamp(36px, 5vw, 64px);
@@ -1169,16 +1174,18 @@ blockquote {
 }
 .events__inner {
   padding: 0 max(48px, calc((100vw - 1280px) / 2 + 48px));
-  display: grid;
-  grid-template-columns: 340px 1fr;
-  gap: 60px;
-  align-items: start;
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+}
+.events__text {
+  max-width: 700px;
 }
 .events__text h2 {
-  font-size: clamp(28px, 3.5vw, 44px);
+  font-size: clamp(32px, 4vw, 52px);
   font-weight: 900;
-  letter-spacing: -0.025em;
-  line-height: 1.2;
+  letter-spacing: -0.03em;
+  line-height: 1.15;
   margin-bottom: 14px;
 }
 .events__text > p {
@@ -1264,7 +1271,12 @@ blockquote {
   padding: 100px 0;
 }
 .how__header {
-  padding: 0 max(48px, calc((100vw - 1280px) / 2 + 48px)) 70px;
+  width: 100%;
+  box-sizing: border-box;
+  padding-top: 0;
+  padding-bottom: 70px;
+  padding-left: max(48px, calc((100vw - 1280px) / 2 + 48px));
+  padding-right: max(48px, calc((100vw - 1280px) / 2 + 48px));
 }
 .how__header h2 {
   font-size: clamp(32px, 4vw, 52px);
@@ -1632,7 +1644,6 @@ blockquote {
   .activity-block__visual { min-height: 400px; }
   .travel__showcase { grid-template-columns: 1fr; }
   .travel__plan-card { position: static; }
-  .events__inner { grid-template-columns: 1fr; }
   .events__feed { grid-template-columns: 1fr 1fr; }
   .event-card--featured { grid-column: span 2; flex-direction: column; }
   .event-card--featured .event-card__img { height: 200px; }
