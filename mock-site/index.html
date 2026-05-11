@@ -644,332 +644,160 @@
 <!-- ===================== HEALTH CARE ===================== -->
 <section class="health-care" id="health-care">
 
-  <!-- 섹션 브리지 -->
   <div class="activity__header hc-header">
     <span class="section-label">건강 동반</span>
     <h2>부모님 곁에 없어도,<br />곁에 있는 것처럼</h2>
     <p class="hc-header__sub">
-      여행 계획을 잡는 것처럼, 부모님 건강도 AI가 먼저 살펴봅니다.<br />
-      손잡고 있지 않아도 — 심장이 뛰는 걸 알고, 약을 챙기고, 위급한 순간 누군가 달려갑니다.
+      여행과 공연을 함께 계획하는 것처럼,<br />
+      부모님 건강도 AI가 먼저 살펴봅니다.
     </p>
-    <div class="hc-kpi">
-      <div class="hc-kpi__item"><strong>95%</strong><span>이상 감지 정확도</span></div>
-      <div class="hc-kpi__div"></div>
-      <div class="hc-kpi__item"><strong>5초</strong><span>이내 자녀 알림</span></div>
-      <div class="hc-kpi__div"></div>
-      <div class="hc-kpi__item"><strong>15분</strong><span>케어 인력 파견 목표</span></div>
-      <div class="hc-kpi__div"></div>
-      <div class="hc-kpi__item"><strong>24/7</strong><span>쉬지 않는 모니터링</span></div>
-    </div>
   </div>
 
-  <!-- ── 블록 1: 실시간 모니터링 ── -->
+  <!-- 01 실시간 모니터링 -->
   <div class="activity-block hc-b1">
-
-    <div class="activity-block__visual hc-visual--cream">
-      <div class="vital-dashboard">
-        <div class="vd-header">
-          <div>
-            <strong>어머니 건강 현황</strong>
-            <p>오늘 오전 9:41 · Galaxy Watch 연동</p>
-          </div>
-          <div class="vd-status">
-            <span class="vd-dot vd-dot--ok"></span><span>정상</span>
+    <div class="activity-block__visual">
+      <div class="food-grid">
+        <div class="food-card food-card--lg">
+          <div class="food-img hc-img--heart"></div>
+          <div class="food-overlay">
+            <span class="food-tag">심박수 모니터링</span>
+            <strong>72 bpm · 정상</strong>
+            <p>어머니 · 오늘 오전 9:41 · Galaxy Watch</p>
           </div>
         </div>
-        <div class="vd-vitals">
-          <div class="vd-vital">
-            <div class="vd-vital__icon">💓</div>
-            <div class="vd-vital__val">72<small>bpm</small></div>
-            <div class="vd-vital__label">심박수</div>
-            <div class="vd-bar"><div class="vd-bar__fill" data-w="60%"></div></div>
-          </div>
-          <div class="vd-vital">
-            <div class="vd-vital__icon">🫁</div>
-            <div class="vd-vital__val">98<small>%</small></div>
-            <div class="vd-vital__label">산소포화도</div>
-            <div class="vd-bar"><div class="vd-bar__fill vd-bar--green" data-w="98%"></div></div>
-          </div>
-          <div class="vd-vital">
-            <div class="vd-vital__icon">🌡️</div>
-            <div class="vd-vital__val">36.5<small>°C</small></div>
-            <div class="vd-vital__label">체온</div>
-            <div class="vd-bar"><div class="vd-bar__fill" data-w="72%"></div></div>
-          </div>
-          <div class="vd-vital">
-            <div class="vd-vital__icon">🚶</div>
-            <div class="vd-vital__val">4,231<small>보</small></div>
-            <div class="vd-vital__label">오늘 걸음수</div>
-            <div class="vd-bar"><div class="vd-bar__fill vd-bar--amber" data-w="42%"></div></div>
+        <div class="food-card">
+          <div class="food-img hc-img--oxygen"></div>
+          <div class="food-overlay">
+            <span class="food-tag">산소포화도</span>
+            <strong>98%</strong>
           </div>
         </div>
-        <div class="vd-chart">
-          <div class="vd-chart__label">주간 심박수 트렌드 — 이번 주 평균 74bpm (정상)</div>
-          <svg viewBox="0 0 320 52" fill="none" style="width:100%; display:block;">
-            <defs>
-              <linearGradient id="vg2" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stop-color="#1a1a1a" stop-opacity="0.12"/>
-                <stop offset="100%" stop-color="#1a1a1a" stop-opacity="0"/>
-              </linearGradient>
-            </defs>
-            <polyline points="0,38 46,28 92,33 138,18 184,28 230,20 276,22 320,14"
-              stroke="#1a1a1a" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-            <polyline points="0,38 46,28 92,33 138,18 184,28 230,20 276,22 320,14 320,52 0,52"
-              fill="url(#vg2)"/>
-          </svg>
-          <div class="vd-chart__days"><span>월</span><span>화</span><span>수</span><span>목</span><span>금</span><span>토</span><span>일</span></div>
-        </div>
-        <!-- 이번 주 리포트 -->
-        <div class="vd-report">
-          <span>📋</span>
-          <div>
-            <strong>이번 주 주간 리포트</strong>
-            <p>수면 품질 12% 향상 · 걸음수 목표 68% 달성 · 심박수 안정적</p>
+        <div class="food-card">
+          <div class="food-img hc-img--steps"></div>
+          <div class="food-overlay">
+            <span class="food-tag">오늘 걸음수</span>
+            <strong>4,231보</strong>
           </div>
         </div>
-        <!-- 이상 알림 샘플 -->
-        <div class="vd-alert-sample">
-          <div class="vd-alert-dot"></div>
-          <p>지난 화요일 오후 2시 — 심박수 일시 상승 (112bpm) 감지 → 자녀에게 알림 전송 → 30분 후 정상 복귀 확인</p>
-        </div>
-        <div class="vd-devices">
-          <span class="vd-device">⌚ Galaxy Watch</span>
-          <span class="vd-device">🍎 Apple Watch</span>
-          <span class="vd-device">💪 Fitbit / Garmin</span>
+        <div class="food-ai-tip">
+          <span>✨</span>
+          <p>이번 주 수면 품질 12% 향상<br />심박수 안정적 · 걸음수 목표 68% 달성</p>
         </div>
       </div>
     </div>
-
     <div class="activity-block__text">
       <span class="section-label">01 — 실시간 건강 모니터링</span>
       <h3>"지금 이 순간,<br />부모님은 괜찮으실까?"</h3>
-      <p>
-        회의 중에도, 출장 중에도, 잠드는 순간에도 — AI가 대신 지켜봅니다.
-        심박수가 갑자기 오르면, 오래 움직임이 없으면, 잠을 제대로 못 주무시면
-        자녀의 핸드폰이 먼저 울립니다.
-      </p>
+      <p>AI가 24시간 심박수·산소포화도·걸음수·수면을 지켜보고, 이상이 생기면 즉시 자녀에게 알립니다.</p>
       <ul class="activity-features">
-        <li><span class="feat-dot"></span><strong>심박수 이상 감지</strong> — 안정 시 60회 미만 or 활동 중 120회 초과 시 즉시 알림. 운동, 산책, 흥분 상황을 AI가 구분해 불필요한 알림을 줄입니다.</li>
-        <li><span class="feat-dot"></span><strong>산소포화도 (SpO2) 모니터링</strong> — 90% 미만 지속 시 긴급 알림. 수면 무호흡 패턴도 감지해 다음 날 아침 리포트로 전달합니다.</li>
-        <li><span class="feat-dot"></span><strong>낙상·미동 감지</strong> — 2시간 이상 움직임 없음 감지 시 "괜찮으신가요?" 알림. 낙상 특유의 충격 패턴 감지 시 즉시 긴급 단계로 격상합니다.</li>
-        <li><span class="feat-dot"></span><strong>수면 품질 분석</strong> — 깊은 수면·렘수면·각성 횟수를 분석해 매주 월요일 아침 자녀에게 주간 리포트를 자동 발송합니다.</li>
-        <li><span class="feat-dot"></span><strong>AI 4단계 심각도 판단</strong> — 관심·주의·경계·긴급으로 자동 분류. 경미한 이상은 일간 리포트로, 경계 이상은 즉시 알림으로 전달합니다.</li>
+        <li><span class="feat-dot"></span>심박수·산소포화도 이상 시 즉시 알림</li>
+        <li><span class="feat-dot"></span>낙상·장시간 미동 감지 후 자녀 연락</li>
+        <li><span class="feat-dot"></span>수면 품질 분석 · 주간 리포트 자동 발송</li>
+        <li><span class="feat-dot"></span>Galaxy Watch · Apple Watch · Fitbit 연동</li>
       </ul>
-      <div class="hc-severity">
-        <div class="hs-row hs--1"><span>관심</span><p>활동량 평소 대비 30% 이하 → 주간 리포트 포함</p></div>
-        <div class="hs-row hs--2"><span>주의</span><p>심박 이상 15분 지속 → 자녀 즉시 알림 + 안부 전화 유도</p></div>
-        <div class="hs-row hs--3"><span>경계</span><p>낙상 의심·장시간 미동 → 긴급 알림 + 케어 파견 옵션</p></div>
-        <div class="hs-row hs--4"><span>긴급</span><p>무반응 30분·SpO2 90% 미만·SOS → 119 자동 + 케어 즉시 파견</p></div>
-      </div>
+      <a href="#download" class="btn btn--dark">건강 모니터링 시작하기</a>
     </div>
   </div>
 
-  <!-- ── 블록 2: 긴급 케어 디스패치 ── -->
+  <!-- 02 긴급 케어 파견 -->
   <div class="activity-block hc-b2">
-
     <div class="activity-block__text">
       <span class="section-label">02 — 긴급 돌봄 연계</span>
       <h3>"달려가고 싶지만<br />갈 수 없는 그 순간,<br />대신 달려갑니다"</h3>
-      <p>
-        자녀가 부재중이어도 괜찮습니다. AI가 이상을 감지하는 즉시
-        검증된 케어 인력을 부모님 댁으로 보냅니다.
-        방문부터 귀가까지 전 과정을 앱으로 실시간 확인할 수 있습니다.
-      </p>
+      <p>이상 감지 즉시 검증된 케어 인력을 파견합니다. 방문부터 귀가까지 앱으로 실시간 확인.</p>
       <ul class="activity-features">
-        <li><span class="feat-dot"></span><strong>평균 15분 내 파견 시작</strong> — 이상 감지 → 자녀 동의 → 인근 케어 인력 자동 매칭. 인력 프로필(이름·자격·평점·경력)을 사전 확인 후 출발합니다.</li>
-        <li><span class="feat-dot"></span><strong>실시간 위치 공유</strong> — 케어 인력 출발부터 도착, 귀가까지 자녀 앱에서 지도로 추적. 중간중간 문자·사진·음성 보고서가 전송됩니다.</li>
-        <li><span class="feat-dot"></span><strong>병원 동행 원스톱</strong> — 케어 인력이 부모님 댁 → 병원 → 귀가까지 전부 동행. 진료 결과·처방전 사진이 자녀 앱으로 실시간 전달됩니다.</li>
-        <li><span class="feat-dot"></span><strong>SOS 즉시 대응</strong> — 부모님이 SOS 버튼 3초 누르면 자녀 즉시 알림. 자녀 미응답 30초 → 케어 자동 파견 / 60초 → 119 자동 연결.</li>
-        <li><span class="feat-dot"></span><strong>인력 신뢰 보장</strong> — 국가자격증 DB 검증·범죄경력 조회·기본 교육 이수 필수. 방문 완료 후 자녀·부모님 쌍방 평점 의무 등록.</li>
+        <li><span class="feat-dot"></span>이상 감지 → 평균 15분 내 파견 시작</li>
+        <li><span class="feat-dot"></span>케어 인력 위치 실시간 지도 추적</li>
+        <li><span class="feat-dot"></span>SOS 3초 → 자녀 알림 · 119 자동 연결</li>
+        <li><span class="feat-dot"></span>국가자격증 검증 · 범죄경력 조회 필수</li>
       </ul>
-      <div class="dispatch-types-h">
-        <div class="dth-item"><span>🧑‍🦳</span><div><strong>방문 요양보호사</strong><p>일상 돌봄 · 3~5만원/시간</p></div></div>
-        <div class="dth-item"><span>👩‍⚕️</span><div><strong>방문 간호사</strong><p>응급처치 · 건강 이상 시</p></div></div>
-        <div class="dth-item"><span>🚗</span><div><strong>병원 동행 매니저</strong><p>접수·수납 대리 · 8~12만원</p></div></div>
-        <div class="dth-item"><span>🚑</span><div><strong>응급 대응 인력</strong><p>119 연계 · 긴급 단계</p></div></div>
-      </div>
+      <a href="#download" class="btn btn--dark">돌봄 서비스 알아보기</a>
     </div>
-
-    <div class="activity-block__visual hc-visual--dark">
-      <div class="dispatch-flow-h">
-        <div class="dfh-step">
-          <div class="dfh-num">1</div>
-          <div class="dfh-body">
-            <strong>이상 감지</strong>
-            <p>웨어러블·SOS·미동 없음</p>
+    <div class="activity-block__visual">
+      <div class="food-grid">
+        <div class="food-card food-card--lg">
+          <div class="food-img hc-img--sos"></div>
+          <div class="food-overlay hc-sos-overlay">
+            <div class="hc-sos-label">SOS</div>
+            <p>3초 누르기 · 즉시 연결</p>
           </div>
         </div>
-        <div class="dfh-line"></div>
-        <div class="dfh-step">
-          <div class="dfh-num">2</div>
-          <div class="dfh-body">
-            <strong>AI 심각도 판단</strong>
-            <p>경계·긴급 단계 자동 분류</p>
+        <div class="food-card">
+          <div class="food-img hc-img--nurse"></div>
+          <div class="food-overlay">
+            <span class="food-tag">방문 간호</span>
+            <strong>즉시 파견</strong>
           </div>
         </div>
-        <div class="dfh-line"></div>
-        <div class="dfh-step dfh-step--alert">
-          <div class="dfh-num dfh-num--alert">!</div>
-          <div class="dfh-body">
-            <strong>자녀 앱 즉시 알림</strong>
-            <p>"어머니 심박수 이상 20분 지속.<br />지금 바로 도움을 보내드릴까요?"</p>
-            <div class="dfh-btns">
-              <button class="btn btn--cream btn--sm">케어 인력 파견</button>
-              <button class="btn btn--outline-white btn--sm">119 연결</button>
-              <button class="btn btn--outline-white btn--sm">직접 전화</button>
-            </div>
+        <div class="food-card">
+          <div class="food-img hc-img--escort"></div>
+          <div class="food-overlay">
+            <span class="food-tag">병원 동행</span>
+            <strong>원스톱</strong>
           </div>
         </div>
-        <div class="dfh-line"></div>
-        <div class="dfh-step dfh-step--match">
-          <div class="dfh-num">3</div>
-          <div class="dfh-body">
-            <strong>15분 내 인력 매칭 출발</strong>
-            <p>이름·자격·평점 확인 후 출발 알림</p>
-            <div class="dfh-care-profile">
-              <div class="dfh-avatar"></div>
-              <div>
-                <strong>김미경 요양보호사</strong>
-                <span>⭐ 4.9 · 경력 7년</span>
-              </div>
-              <span class="dfh-eta">12분 후 도착</span>
-            </div>
-          </div>
-        </div>
-        <div class="dfh-line"></div>
-        <div class="dfh-step">
-          <div class="dfh-num">4</div>
-          <div class="dfh-body">
-            <strong>방문 · 실시간 보고</strong>
-            <p>상태 확인 → 사진·음성 전송<br />필요 시 병원 동행 → 귀가 확인</p>
-          </div>
-        </div>
-        <!-- SOS 버튼 -->
-        <div class="dfh-sos-wrap">
-          <div class="sos-ring">
-            <button class="sos-big-btn" id="sosBigBtn">SOS<br/><small>3초 누르기</small></button>
-          </div>
-          <p>부모님 앱 메인 상단 고정</p>
+        <div class="food-ai-tip hc-ai-dark">
+          <span>📱</span>
+          <p>김미경 요양보호사 · ⭐ 4.9 · 12분 후 도착 예정</p>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- ── 블록 3: 건강 관리 & 의료 일정 ── -->
+  <!-- 03 건강 관리 & 의료 일정 -->
   <div class="activity-block hc-b3">
-
-    <div class="activity-block__visual hc-visual--warm">
-      <div class="medical-cards-h">
-        <!-- 건강검진 AI 분석 -->
-        <div class="mch-card">
-          <div class="mch-header">
-            <span class="mch-icon">📋</span>
-            <strong>2025 건강검진 AI 분석</strong>
-            <span class="mch-tag mch-tag--ai">AI 요약</span>
-          </div>
-          <div class="mch-compare">
-            <div class="mch-compare__label"><span>항목</span><span>올해</span><span>작년</span><span>상태</span></div>
-            <div class="mch-row mch-row--warn"><span>혈당</span><strong>108</strong><span class="prev">100</span><span class="mch-badge mch-badge--warn">↑ 주의</span></div>
-            <div class="mch-row mch-row--ok"><span>혈압</span><strong>118/76</strong><span class="prev">122/80</span><span class="mch-badge mch-badge--ok">↓ 개선</span></div>
-            <div class="mch-row mch-row--ok"><span>콜레스테롤</span><strong>185</strong><span class="prev">192</span><span class="mch-badge mch-badge--ok">↓ 개선</span></div>
-            <div class="mch-row mch-row--ok"><span>BMI</span><strong>23.4</strong><span class="prev">24.1</span><span class="mch-badge mch-badge--ok">정상</span></div>
-          </div>
-          <div class="mch-ai-tip">
-            <span>💡</span>
-            <p><strong>AI 소견:</strong> 혈당이 전년 대비 8 상승했어요. 식후 혈당 관리와 담당의 확인을 권장합니다. 다음 내과 진료 때 함께 여쭤보세요.</p>
+    <div class="activity-block__visual">
+      <div class="food-grid">
+        <div class="food-card food-card--lg">
+          <div class="food-img hc-img--checkup"></div>
+          <div class="food-overlay">
+            <span class="food-tag">2025 건강검진 AI 분석</span>
+            <strong>혈당 주의 · 혈압 개선</strong>
+            <p>전년 대비 수치 자동 비교</p>
           </div>
         </div>
-        <!-- 병원 일정 -->
-        <div class="mch-card">
-          <div class="mch-header">
-            <span class="mch-icon">🏥</span>
-            <strong>이번 달 진료 일정</strong>
-          </div>
-          <div class="mch-appts">
-            <div class="mch-appt mch-appt--soon">
-              <div class="mch-appt__left">
-                <span class="mch-appt__d">18</span>
-                <span class="mch-appt__m">6월</span>
-              </div>
-              <div class="mch-appt__info">
-                <strong>내과 정기 진료</strong>
-                <p>서울성모병원 · 오전 10시</p>
-                <div class="mch-appt__tag">D-3 · 혈당 재검 예정</div>
-              </div>
-              <div class="mch-appt__btns">
-                <button class="btn btn--dark btn--sm">동행</button>
-                <button class="btn btn--outline-dark btn--sm">택시</button>
-              </div>
-            </div>
-            <div class="mch-appt">
-              <div class="mch-appt__left">
-                <span class="mch-appt__d">3</span>
-                <span class="mch-appt__m">7월</span>
-              </div>
-              <div class="mch-appt__info">
-                <strong>안과 정기 검진</strong>
-                <p>강남성심안과 · 오후 2시</p>
-                <div class="mch-appt__tag mch-appt__tag--far">D-18</div>
-              </div>
-            </div>
+        <div class="food-card">
+          <div class="food-img hc-img--hospital"></div>
+          <div class="food-overlay">
+            <span class="food-tag">진료 D-3</span>
+            <strong>내과 정기진료</strong>
           </div>
         </div>
-        <!-- 처방약 -->
-        <div class="mch-card">
-          <div class="mch-header">
-            <span class="mch-icon">💊</span>
-            <strong>오늘 처방약 복용</strong>
-            <span class="mch-tag mch-tag--ok">2/3 완료</span>
+        <div class="food-card">
+          <div class="food-img hc-img--meds"></div>
+          <div class="food-overlay">
+            <span class="food-tag">복용 완료</span>
+            <strong>오늘 2/3</strong>
           </div>
-          <div class="mch-meds">
-            <div class="mch-med mch-med--done">
-              <span class="mch-check">✓</span>
-              <div><strong>혈압약 (노바스크 5mg)</strong><p>오전 8:00 복용 완료 · 자녀에게 공유됨</p></div>
-            </div>
-            <div class="mch-med mch-med--done">
-              <span class="mch-check">✓</span>
-              <div><strong>종합비타민</strong><p>오전 8:00 복용 완료</p></div>
-            </div>
-            <div class="mch-med mch-med--pending">
-              <span class="mch-check mch-check--pending">○</span>
-              <div><strong>위장약 (넥시움 40mg)</strong><p>저녁 7:00 예정 · 알림 설정됨</p></div>
-            </div>
-          </div>
+        </div>
+        <div class="food-ai-tip">
+          <span>💡</span>
+          <p>어머니 내일 내과 진료 있으세요.<br />동행하시겠어요?</p>
         </div>
       </div>
     </div>
-
     <div class="activity-block__text">
       <span class="section-label">03 — 건강 관리 & 의료 일정</span>
       <h3>"혼자 병원에<br />다녀오신 부모님,<br />괜찮으셨을까?"</h3>
-      <p>
-        진료 결과를 모르면 걱정되고, 약을 잘 드시는지 모르면 불안합니다.
-        AI가 검진 결과를 읽어주고, 진료 일정을 미리 알려주고,
-        약 드실 시간을 챙겨드립니다. 그 모든 것을 자녀도 함께 봅니다.
-      </p>
+      <p>검진 결과 AI 분석, 진료 일정 알림, 처방약 복용 관리까지. 모든 정보를 자녀와 함께 봅니다.</p>
       <ul class="activity-features">
-        <li><span class="feat-dot"></span><strong>건강검진 결과 AI 분석</strong> — PDF 업로드 한 번으로 전년 대비 수치 변화를 시각화합니다. 주의 항목은 하이라이트하고, 다음 진료 때 확인할 질문 목록을 자동으로 만들어 드립니다.</li>
-        <li><span class="feat-dot"></span><strong>병원 일정 D-1 알림</strong> — 정기 진료 전날 자녀에게 "어머니 내일 내과 진료 있으세요"라는 알림이 갑니다. 동행할지, 카카오택시를 보낼지 버튼 하나로 결정합니다.</li>
-        <li><span class="feat-dot"></span><strong>처방약 복용 관리</strong> — 부모님 앱에 복용 알림, 복용 완료 체크, 미복용 시 재알림. 자녀 앱에는 오늘 약을 드셨는지 현황이 자동으로 표시됩니다.</li>
-        <li><span class="feat-dot"></span><strong>병원 동행 원격 지원</strong> — 케어 인력이 병원 동행 시 진료 결과·처방전 사진을 자녀 앱으로 실시간 전달. 다음 내원 일정이 캘린더에 자동 등록됩니다.</li>
-        <li><span class="feat-dot"></span><strong>의료 기록 타임라인</strong> — 병원명·진단명·처방 내역이 시계열로 저장됩니다. 응급 상황 시 구급대원에게 즉시 공유할 수 있는 의료 정보 카드도 자동 생성됩니다.</li>
+        <li><span class="feat-dot"></span>건강검진 PDF → AI 요약 · 전년 수치 비교</li>
+        <li><span class="feat-dot"></span>진료 D-1 알림 · 동행·택시 버튼 원터치</li>
+        <li><span class="feat-dot"></span>처방약 복용 알림 · 완료 현황 자녀 공유</li>
+        <li><span class="feat-dot"></span>의료 기록 타임라인 · 응급 정보카드 생성</li>
       </ul>
       <a href="#download" class="btn btn--dark">건강 관리 시작하기</a>
     </div>
   </div>
 
-  <!-- ── 보건소 배너 ── -->
+  <!-- 보건소 배너 -->
   <div class="hc-public">
     <div class="hc-public__inner">
       <div class="hc-public__icon">🏥</div>
       <div class="hc-public__text">
         <span class="section-label section-label--light">공공 연계</span>
         <h4>보건소 무료 스마트워치 지원 사업과 연계됩니다</h4>
-        <p>
-          만 65세 이상 부모님은 지역 보건소에서 스마트워치를 무료로 받으실 수 있습니다.
-          많은 분들이 이 사실을 모르거나 활용하지 못하고 계세요. 앱 설치 후 거주지 입력 하나로
-          지원 가능 여부를 즉시 확인하고, 수령 후 바로 건강 모니터링을 시작할 수 있습니다.
-        </p>
+        <p>만 65세 이상 부모님께 무료로 제공되는 스마트워치. 앱 설치 후 거주지 입력 하나로 지원 여부를 바로 확인하세요.</p>
       </div>
       <a href="#download" class="btn btn--cream">지원 여부 확인하기</a>
     </div>
