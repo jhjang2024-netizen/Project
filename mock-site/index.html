@@ -790,53 +790,59 @@
     </div>
   </div>
 
-  <!-- 04 AI 안부 전화 -->
+  <!-- 04 안부 전화 팝업 알림 -->
   <div class="activity-block hc-b4">
     <div class="activity-block__visual">
       <div class="food-grid">
         <div class="food-card food-card--lg hc-call-card" id="openCallPopup">
           <div class="food-img hc-img--call"></div>
           <div class="food-overlay hc-call-overlay">
-            <div class="hc-call-rings">
-              <span></span><span></span><span></span>
+            <!-- 폰 알림 미리보기 -->
+            <div class="hc-notif-preview">
+              <div class="hc-notif-icon">📱</div>
+              <div class="hc-notif-text">
+                <strong>함께</strong>
+                <span>오후 2:00 · 어머니께 안부 전화 드릴 시간이에요</span>
+              </div>
             </div>
-            <div class="hc-call-icon">📞</div>
-            <strong>AI 안부 전화 중...</strong>
-            <p>어머니 · 오늘 오후 2:00</p>
+            <div class="hc-call-btns">
+              <span class="hc-call-btn hc-call-btn--call">📞 지금 전화하기</span>
+              <span class="hc-call-btn hc-call-btn--later">나중에</span>
+            </div>
             <span class="hc-call-tap">탭하여 체험하기</span>
           </div>
         </div>
         <div class="food-card">
-          <div class="food-img hc-img--voice"></div>
+          <div class="food-img hc-img--streak"></div>
           <div class="food-overlay">
-            <span class="food-tag">음성 분석</span>
-            <strong>활기참 · 이상 없음</strong>
+            <span class="food-tag">연속 통화</span>
+            <strong>🔥 12일째</strong>
           </div>
         </div>
         <div class="food-card">
           <div class="food-img hc-img--schedule"></div>
           <div class="food-overlay">
-            <span class="food-tag">통화 예약</span>
+            <span class="food-tag">알림 예약</span>
             <strong>매일 오후 2시</strong>
           </div>
         </div>
         <div class="food-ai-tip">
-          <span>🤖</span>
-          <p>오늘 통화에서 어머니 목소리 톤 분석 완료<br />기분 良好 · 피로도 낮음 · 다음 통화 예약됨</p>
+          <span>📊</span>
+          <p>지난달 어머니와 통화한 날 28일<br />평균 통화 시간 7분 · 미수신 0회</p>
         </div>
       </div>
     </div>
     <div class="activity-block__text">
-      <span class="section-label">04 — AI 안부 전화</span>
-      <h3>"오늘 전화했어?"<br />그 한마디가 걱정입니다</h3>
-      <p>AI가 매일 정해진 시간에 부모님께 안부 전화를 드립니다. 대화 내용·목소리 톤을 분석해 이상 징후를 자녀에게 리포트합니다.</p>
+      <span class="section-label">04 — 안부 전화 자동 팝업</span>
+      <h3>"전화해야지"<br />하다가 또 잊으셨나요?</h3>
+      <p>매일 정해진 시간, 폰 화면에 팝업이 자동으로 뜹니다. 버튼 하나로 바로 전화가 연결되니 바쁜 일상에서도 부모님과의 연락을 놓치지 않습니다.</p>
       <ul class="activity-features">
-        <li><span class="feat-dot"></span>매일 지정 시간 자동 전화 · 자녀 대신 목소리로 안심</li>
-        <li><span class="feat-dot"></span>음성 톤·대화 패턴 AI 분석 · 우울·피로 조기 감지</li>
-        <li><span class="feat-dot"></span>3회 미수신 시 자녀에게 즉시 알림</li>
-        <li><span class="feat-dot"></span>통화 요약 리포트 매일 저녁 자동 발송</li>
+        <li><span class="feat-dot"></span>원하는 시간 지정 · 매일 자동 팝업 알림</li>
+        <li><span class="feat-dot"></span>팝업에서 버튼 하나로 즉시 전화 연결</li>
+        <li><span class="feat-dot"></span>연속 통화 기록 · 스트릭으로 습관 형성</li>
+        <li><span class="feat-dot"></span>3일 미통화 시 파트너에게도 알림 공유</li>
       </ul>
-      <button class="btn btn--dark" id="openCallPopupBtn">안부 전화 직접 체험하기</button>
+      <button class="btn btn--dark" id="openCallPopupBtn">팝업 알림 직접 체험하기</button>
     </div>
   </div>
 
@@ -1100,68 +1106,72 @@
 
 <!-- ===================== 안부 전화 팝업 ===================== -->
 <div class="call-popup-overlay" id="callPopupOverlay" aria-hidden="true">
-  <div class="call-popup" role="dialog" aria-modal="true" aria-label="AI 안부 전화 체험">
+  <div class="call-popup" role="dialog" aria-modal="true" aria-label="안부 전화 팝업 체험">
     <button class="call-popup__close" id="closeCallPopup" aria-label="닫기">✕</button>
 
-    <!-- 전화 헤더 -->
-    <div class="call-popup__header">
-      <div class="call-popup__avatar">👩‍🦳</div>
-      <p class="call-popup__name">어머니 · 김순희</p>
-      <p class="call-popup__status" id="callStatus">AI 안부 전화 연결 중...</p>
-      <div class="call-popup__waves" id="callWaves">
-        <span></span><span></span><span></span><span></span><span></span>
+    <!-- 폰 화면 프레임 -->
+    <div class="phone-frame">
+      <div class="phone-frame__bar">
+        <span class="phone-frame__time">14:00</span>
+        <span class="phone-frame__icons">●●● 🔋</span>
       </div>
-    </div>
 
-    <!-- 대화 스크립트 -->
-    <div class="call-popup__transcript" id="callTranscript">
-      <div class="call-bubble call-bubble--ai hidden" id="msg1">
-        <span class="call-bubble__label">AI (자녀 대신)</span>
-        <p>어머니, 안녕하세요! 오늘 하루 어떠세요? 😊</p>
+      <!-- STEP 1: 팝업 알림 화면 -->
+      <div class="phone-screen" id="screenAlert">
+        <div class="phone-screen__bg"></div>
+        <div class="phone-alert">
+          <div class="phone-alert__app">
+            <span class="phone-alert__app-icon">🤝</span>
+            <span class="phone-alert__app-name">함께</span>
+            <span class="phone-alert__time">지금</span>
+          </div>
+          <p class="phone-alert__title">어머니께 안부 전화 드릴 시간이에요 📞</p>
+          <p class="phone-alert__body">마지막 통화로부터 1일이 지났어요. 오늘도 목소리 들려드리세요!</p>
+          <div class="phone-alert__actions">
+            <button class="phone-alert__btn phone-alert__btn--call" id="btnCallNow">📞 지금 전화하기</button>
+            <button class="phone-alert__btn phone-alert__btn--later" id="btnCallLater">10분 후 다시 알림</button>
+          </div>
+        </div>
+        <div class="phone-streak">
+          <span>🔥 연속 12일째 안부 전화 중</span>
+        </div>
       </div>
-      <div class="call-bubble call-bubble--mom hidden" id="msg2">
-        <span class="call-bubble__label">어머니</span>
-        <p>아이고, 잘 지내지~ 오늘 날씨도 좋고 산책도 다녀왔어.</p>
-      </div>
-      <div class="call-bubble call-bubble--ai hidden" id="msg3">
-        <span class="call-bubble__label">AI (자녀 대신)</span>
-        <p>산책 다녀오셨어요? 좋으셨겠다! 밥은 잘 드셨어요?</p>
-      </div>
-      <div class="call-bubble call-bubble--mom hidden" id="msg4">
-        <span class="call-bubble__label">어머니</span>
-        <p>응, 된장국이랑 잘 먹었지. 몸은 아무렇지도 않으니 걱정 말고~</p>
-      </div>
-    </div>
 
-    <!-- AI 분석 결과 -->
-    <div class="call-popup__report hidden" id="callReport">
-      <p class="call-report__title">📊 오늘의 안부 통화 리포트</p>
-      <div class="call-report__grid">
-        <div class="call-report__item call-report__item--good">
-          <span class="call-report__icon">😊</span>
-          <strong>기분</strong>
-          <p>활기참 · 良好</p>
+      <!-- STEP 2: 전화 연결 화면 -->
+      <div class="phone-screen phone-screen--calling hidden" id="screenCalling">
+        <div class="phone-calling__bg"></div>
+        <p class="phone-calling__label">전화 연결 중...</p>
+        <div class="phone-calling__avatar">👩‍🦳</div>
+        <p class="phone-calling__name">어머니 · 김순희</p>
+        <p class="phone-calling__number">010-5678-****</p>
+        <div class="phone-calling__rings">
+          <span></span><span></span><span></span>
         </div>
-        <div class="call-report__item call-report__item--good">
-          <span class="call-report__icon">🗣️</span>
-          <strong>음성 톤</strong>
-          <p>밝음 · 이상 없음</p>
-        </div>
-        <div class="call-report__item call-report__item--good">
-          <span class="call-report__icon">🚶</span>
-          <strong>활동</strong>
-          <p>산책 완료 · 식사 정상</p>
-        </div>
-        <div class="call-report__item call-report__item--info">
-          <span class="call-report__icon">📅</span>
-          <strong>다음 통화</strong>
-          <p>내일 오후 2:00</p>
+        <div class="phone-calling__actions">
+          <button class="phone-calling__end" id="btnEndCall">📵</button>
+          <p>통화 종료</p>
         </div>
       </div>
-      <p class="call-report__summary">이 리포트는 매일 저녁 자녀에게 자동 발송됩니다.</p>
-    </div>
 
-    <button class="btn btn--dark call-popup__cta hidden" id="callCta">안부 전화 서비스 시작하기</button>
+      <!-- STEP 3: 통화 완료 화면 -->
+      <div class="phone-screen phone-screen--done hidden" id="screenDone">
+        <div class="phone-done__check">✓</div>
+        <p class="phone-done__title">오늘도 연락했어요!</p>
+        <p class="phone-done__sub">어머니와 통화 완료 · 8분 24초</p>
+        <div class="phone-done__streak">
+          <span class="phone-done__fire">🔥</span>
+          <strong>연속 13일</strong>
+          <p>내일도 오후 2시에 알려드릴게요</p>
+        </div>
+        <div class="phone-done__stats">
+          <div><strong>이번 달</strong><p>28회 통화</p></div>
+          <div><strong>평균</strong><p>7분 12초</p></div>
+          <div><strong>미수신</strong><p>0회</p></div>
+        </div>
+      </div>
+    </div><!-- /phone-frame -->
+
+    <button class="btn btn--dark call-popup__cta" id="callCta">팝업 알림 설정하기</button>
   </div>
 </div>
 
