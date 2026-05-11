@@ -57,6 +57,69 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
+  // ── 안부 전화 팝업 ──────────────────────────────────────────────────
+  const callOverlay  = document.getElementById('callPopupOverlay');
+  const openTriggers = [document.getElementById('openCallPopup'), document.getElementById('openCallPopupBtn')];
+  const closeBtn     = document.getElementById('closeCallPopup');
+  const callStatus   = document.getElementById('callStatus');
+  const callWaves    = document.getElementById('callWaves');
+  const messages     = ['msg1','msg2','msg3','msg4'].map(id => document.getElementById(id));
+  const callReport   = document.getElementById('callReport');
+  const callCta      = document.getElementById('callCta');
+
+  let callTimers = [];
+
+  function openCallPopup() {
+    callOverlay.classList.add('is-open');
+    callOverlay.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+    resetCall();
+    runCallSequence();
+  }
+
+  function closeCallPopup() {
+    callOverlay.classList.remove('is-open');
+    callOverlay.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+    callTimers.forEach(clearTimeout);
+    callTimers = [];
+  }
+
+  function resetCall() {
+    callStatus.textContent = 'AI 안부 전화 연결 중...';
+    callWaves.classList.remove('paused');
+    messages.forEach(m => m.classList.add('hidden'));
+    callReport.classList.add('hidden');
+    callCta.classList.add('hidden');
+  }
+
+  function runCallSequence() {
+    const t = (ms, fn) => { callTimers.push(setTimeout(fn, ms)); };
+    t(800,  () => { callStatus.textContent = '통화 중 · 00:01'; });
+    t(1400, () => messages[0].classList.remove('hidden'));
+    t(2800, () => messages[1].classList.remove('hidden'));
+    t(4200, () => messages[2].classList.remove('hidden'));
+    t(5600, () => messages[3].classList.remove('hidden'));
+    t(7000, () => {
+      callStatus.textContent = '통화 종료 · 00:42';
+      callWaves.classList.add('paused');
+    });
+    t(7600, () => {
+      callReport.classList.remove('hidden');
+      callCta.classList.remove('hidden');
+    });
+  }
+
+  openTriggers.forEach(el => el && el.addEventListener('click', openCallPopup));
+  closeBtn.addEventListener('click', closeCallPopup);
+  callOverlay.addEventListener('click', e => { if (e.target === callOverlay) closeCallPopup(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeCallPopup(); });
+
+  callCta.addEventListener('click', () => {
+    closeCallPopup();
+    document.getElementById('download')?.scrollIntoView({ behavior: 'smooth' });
+  });
+
   // ── Schedule sync demo buttons ─────────────────────────────────────
   document.querySelectorAll('.sync-btn').forEach(btn => {
     btn.addEventListener('click', () => {
