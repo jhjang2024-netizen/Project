@@ -871,105 +871,141 @@
     <p>가족의 일상을 AI가 조용히, 그러나 확실하게 채웁니다.</p>
   </div>
 
-  <div class="services-grid">
+  <!-- ────────────── BENTO GRID ────────────── -->
+  <div class="svc-bento">
 
-    <!-- ① AI 맛집 추천 — Hero wide -->
-    <div class="svc-card svc-card--hero svc-card--dining">
-      <div class="svc-card__badge">AI 추천</div>
-      <div class="svc-icon-wrap svc-icon-wrap--orange">🍽️</div>
-      <h3>AI 맛집 추천 &amp; 동행 예약</h3>
-      <p>과거 방문 이력·선호도·계절·기념일을 분석해 최적 외식 일정을 제안하고, 양측 동의 시 자동으로 예약합니다.</p>
-      <ul class="svc-checks">
-        <li>방문 이력 AI 분석 (평점·재방문·선호 메뉴)</li>
-        <li>부모님 생신 D-14 · 마지막 외식 N주 후 자동 트리거</li>
-        <li>예약 완료 → 캘린더 자동 등록 + 당일 리마인더</li>
-      </ul>
-      <div class="svc-card__glow svc-card__glow--orange"></div>
-    </div>
-
-    <!-- ② AI 여행 플래너— Hero tall -->
-    <div class="svc-card svc-card--hero svc-card--travel">
-      <div class="svc-card__badge svc-card__badge--blue">원버튼</div>
-      <div class="svc-icon-wrap svc-icon-wrap--blue">✈️</div>
-      <h3>AI 가족 여행<br />토탈 플래너</h3>
-      <p>여행지·숙소·교통을 패키지로 추천하고, 단 한 번의 동의로 KTX·항공·렌터카까지 전자동 예약합니다.</p>
-      <span class="svc-pill svc-pill--blue">원버튼 완전 자동</span>
-      <div class="svc-card__glow svc-card__glow--blue"></div>
-    </div>
-
-    <!-- ③ 카카오택시 자동 호출 — NEW -->
-    <div class="svc-card svc-card--kakao">
-      <div class="svc-card__badge svc-card__badge--kakao">카카오 연동</div>
-      <div class="svc-icon-wrap svc-icon-wrap--kakao">🚖</div>
-      <h3>카카오택시<br />자동 호출</h3>
-      <p>부모님께서 직접 앱을 다루실 필요가 없습니다. 외출 일정 종료 시 <strong>자녀가 버튼 하나로</strong> 부모님 위치에서 집까지 카카오택시를 대신 불러드립니다.</p>
-      <!-- 미니 UI 데모 -->
-      <div class="svc-kakao-demo">
-        <div class="svc-kakao-route">
-          <span class="svc-kakao-dot svc-kakao-dot--from"></span>
-          <span class="svc-kakao-label">롯데백화점 강남점</span>
-        </div>
-        <div class="svc-kakao-line"></div>
-        <div class="svc-kakao-route">
-          <span class="svc-kakao-dot svc-kakao-dot--to"></span>
-          <span class="svc-kakao-label">서울 강남구 OO아파트</span>
-        </div>
-        <div class="svc-kakao-meta">예상 도착 <strong>3분</strong> · 요금 <strong>~8,200원</strong></div>
-        <button class="svc-kakao-btn">택시 자동 호출 완료 ✓</button>
+    <!-- ① AI 맛집 · 와이드 히어로 -->
+    <div class="sb sb--dining">
+      <div class="sb__top">
+        <span class="sb__num">28K+</span>
+        <span class="sb__tag">AI 맛집 추천</span>
       </div>
-      <div class="svc-card__glow svc-card__glow--kakao"></div>
+      <div class="sb__icon">🍽️</div>
+      <h3 class="sb__title">AI 맛집 추천 &amp; 동행 예약</h3>
+      <p class="sb__desc">방문 이력·선호도·기념일을 분석해 최적 외식 일정을 제안하고 양측 동의 시 자동 예약합니다.</p>
+      <ul class="sb__checks">
+        <li>방문 이력 AI 분석 — 평점·재방문·메뉴 선호도</li>
+        <li>생신 D-14 · 마지막 외식 N주 경과 자동 트리거</li>
+        <li>예약 완료 → 캘린더 등록 + 당일 리마인더</li>
+      </ul>
+      <div class="sb__orb sb__orb--a"></div>
     </div>
 
-    <!-- ④ 안부전화 팝업 -->
-    <div class="svc-card svc-card--std svc-card--call">
-      <div class="svc-icon-wrap svc-icon-wrap--rose">📞</div>
-      <h3>원터치<br />안부전화 팝업</h3>
-      <p>매일 지정 시간 폰에 팝업이 자동으로 뜨고, 버튼 한 번으로 부모님과 즉시 연결됩니다.</p>
-      <span class="svc-pill svc-pill--rose">🔥 연속 12일</span>
+    <!-- ② 카카오택시 · 사이드 카드 -->
+    <div class="sb sb--kakao">
+      <span class="sb__tag sb__tag--y">카카오 연동</span>
+      <div class="sb__stat-block">
+        <span class="sb__stat-num">3<span class="sb__stat-unit">분</span></span>
+        <span class="sb__stat-label">평균 배차 시간</span>
+      </div>
+      <div class="sb__icon">🚖</div>
+      <h3 class="sb__title">카카오택시<br />자동 호출</h3>
+      <p class="sb__desc">부모님이 앱 없이도 됩니다. 자녀가 버튼 하나로 부모님 위치에서 집까지 직접 불러드립니다.</p>
+      <div class="sb__route">
+        <span class="sb__dot sb__dot--b"></span><span>롯데백화점 강남점</span>
+        <span class="sb__vline"></span>
+        <span class="sb__dot sb__dot--r"></span><span>강남구 OO아파트</span>
+        <div class="sb__route-meta">도착 <b>3분</b> · 요금 <b>~8,200원</b></div>
+      </div>
+      <div class="sb__orb sb__orb--y"></div>
     </div>
 
-    <!-- ⑤ 숙박 예약 -->
-    <div class="svc-card svc-card--std svc-card--hotel">
-      <div class="svc-icon-wrap svc-icon-wrap--teal">🏨</div>
-      <h3>AI 숙박<br />자동 예약</h3>
-      <p>작년 동일 시즌 예약 패턴을 감지해 같은 펜션·리조트를 사전에 알리고 자동 예약합니다.</p>
-      <span class="svc-pill svc-pill--teal">가격 비교 자동</span>
+    <!-- ③ AI 여행 플래너 -->
+    <div class="sb sb--travel">
+      <div class="sb__stat-block">
+        <span class="sb__stat-num">1<span class="sb__stat-unit">번</span></span>
+        <span class="sb__stat-label">동의로 전자동 예약</span>
+      </div>
+      <div class="sb__icon">✈️</div>
+      <h3 class="sb__title">AI 가족 여행<br />토탈 플래너</h3>
+      <p class="sb__desc">여행지·숙소·교통을 패키지로 추천. KTX·항공·렌터카까지 원버튼으로 완료합니다.</p>
+      <span class="sb__pill sb__pill--b">원버튼 완전 자동</span>
+      <div class="sb__orb sb__orb--b"></div>
     </div>
 
-    <!-- ⑥ 스케줄·픽업 -->
-    <div class="svc-card svc-card--std svc-card--pickup">
-      <div class="svc-icon-wrap svc-icon-wrap--purple">🗓️</div>
-      <h3>스케줄 공유 &amp;<br />픽업 서비스</h3>
-      <p>부모님이 동의한 일정만 자녀와 공유. 병원 동행 요청·카카오택시 호출로 귀가까지 안전하게.</p>
+    <!-- ④ 원터치 안부전화 -->
+    <div class="sb sb--call">
+      <div class="sb__stat-block">
+        <span class="sb__stat-num">🔥 <span class="sb__stat-num--sm">12</span><span class="sb__stat-unit">일</span></span>
+        <span class="sb__stat-label">연속 안부 통화 중</span>
+      </div>
+      <div class="sb__icon">📞</div>
+      <h3 class="sb__title">원터치 안부전화</h3>
+      <p class="sb__desc">매일 지정 시간 폰에 팝업이 자동으로 뜨고, 버튼 하나로 즉시 연결됩니다.</p>
+      <div class="sb__orb sb__orb--r"></div>
     </div>
 
-    <!-- ⑦ 건강 관리 -->
-    <div class="svc-card svc-card--std svc-card--health">
-      <div class="svc-icon-wrap svc-icon-wrap--green">🏥</div>
-      <h3>건강 관리 &amp;<br />의료 일정 동반</h3>
-      <p>건강검진 PDF AI 요약·진료 리마인더·처방약 복용 관리, 자녀 동행 요청까지 통합 관리합니다.</p>
+    <!-- ⑤ 건강 모니터링 -->
+    <div class="sb sb--health">
+      <div class="sb__stat-block">
+        <span class="sb__stat-num">24<span class="sb__stat-unit">/7</span></span>
+        <span class="sb__stat-label">실시간 건강 모니터링</span>
+      </div>
+      <div class="sb__icon">❤️</div>
+      <h3 class="sb__title">건강 관리 &amp;<br />의료 일정 동반</h3>
+      <p class="sb__desc">심박·산소포화도·낙상 감지 + 건강검진 PDF AI 분석 + 진료 리마인더까지.</p>
+      <div class="sb__orb sb__orb--g"></div>
     </div>
 
-    <!-- ⑧ 케어 프로파일 -->
-    <div class="svc-card svc-card--std svc-card--profile">
-      <div class="svc-icon-wrap svc-icon-wrap--indigo">👤</div>
-      <h3>맞춤 케어<br />프로파일</h3>
-      <p>자녀·부모님이 서로 동의한 정보를 기반으로 AI가 최적 케어 타이밍과 방식을 도출합니다.</p>
+    <!-- ⑥ AI 숙박 예약 -->
+    <div class="sb sb--hotel">
+      <div class="sb__stat-block">
+        <span class="sb__stat-num">37<span class="sb__stat-unit">%</span></span>
+        <span class="sb__stat-label">얼리버드 가격 절약</span>
+      </div>
+      <div class="sb__icon">🏨</div>
+      <h3 class="sb__title">AI 숙박<br />자동 예약</h3>
+      <p class="sb__desc">작년 시즌 패턴을 감지해 같은 펜션·리조트를 사전에 알리고 자동 예약합니다.</p>
+      <span class="sb__pill sb__pill--t">가격 비교 자동</span>
+      <div class="sb__orb sb__orb--t"></div>
     </div>
 
-    <!-- ⑨ 양방향 동의 -->
-    <div class="svc-card svc-card--std svc-card--consent">
-      <div class="svc-icon-wrap svc-icon-wrap--lime">✅</div>
-      <h3>양방향 동의<br />시스템</h3>
-      <p>모든 자동화는 양측의 명시적 동의가 필수. 동의 이력은 투명하게 기록됩니다.</p>
-      <div class="svc-consent-demo">
-        <span class="svc-consent-msg">OO이가 강릉 여행 같이 가자고 해요.</span>
-        <div class="svc-consent-btns">
+    <!-- ⑦ 스케줄 공유 & 픽업 -->
+    <div class="sb sb--pickup">
+      <div class="sb__stat-block">
+        <span class="sb__stat-num">30<span class="sb__stat-unit">분</span></span>
+        <span class="sb__stat-label">외출 종료 전 사전 알림</span>
+      </div>
+      <div class="sb__icon">🗓️</div>
+      <h3 class="sb__title">스케줄 공유<br />&amp; 픽업 서비스</h3>
+      <p class="sb__desc">동의한 일정만 공유, 카카오택시 호출로 귀가까지 안전하게 확인합니다.</p>
+      <div class="sb__orb sb__orb--p"></div>
+    </div>
+
+    <!-- ⑧ 양방향 동의 · 풀 와이드 -->
+    <div class="sb sb--consent">
+      <div class="sb__consent-left">
+        <span class="sb__tag">양방향 동의</span>
+        <div class="sb__stat-block">
+          <span class="sb__stat-num">2<span class="sb__stat-unit">명</span></span>
+          <span class="sb__stat-label">동의해야 실행됩니다</span>
+        </div>
+        <div class="sb__icon">✅</div>
+        <h3 class="sb__title">양방향 동의 시스템</h3>
+        <p class="sb__desc">모든 자동화는 자녀와 부모님 양측의 명시적 동의가 필수. 동의 이력은 투명하게 기록됩니다.</p>
+      </div>
+      <div class="sb__consent-right">
+        <div class="sb__chat-bubble sb__chat-bubble--in">OO이가 강릉 여행 같이 가자고 해요.</div>
+        <div class="sb__consent-actions">
           <button class="svc-consent-btn svc-consent-btn--yes">좋아요, 가자!</button>
           <button class="svc-consent-btn svc-consent-btn--alt">날짜 바꿔</button>
           <button class="svc-consent-btn svc-consent-btn--no">이번엔 괜찮아</button>
         </div>
+        <p class="sb__consent-note">💬 부모님 앱에서 응답하는 화면입니다</p>
       </div>
+      <div class="sb__orb sb__orb--lm"></div>
+    </div>
+
+    <!-- ⑨ 맞춤 케어 프로파일 -->
+    <div class="sb sb--profile">
+      <div class="sb__stat-block">
+        <span class="sb__stat-num">100<span class="sb__stat-unit">%</span></span>
+        <span class="sb__stat-label">맞춤 AI 케어</span>
+      </div>
+      <div class="sb__icon">👤</div>
+      <h3 class="sb__title">맞춤 케어<br />프로파일</h3>
+      <p class="sb__desc">양측이 동의한 정보를 기반으로 AI가 최적 케어 타이밍과 방식을 도출합니다.</p>
+      <div class="sb__orb sb__orb--i"></div>
     </div>
 
   </div>
