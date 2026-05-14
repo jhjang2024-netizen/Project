@@ -2,13 +2,16 @@
 
 document.addEventListener('DOMContentLoaded', () => {
 
-  // ── Nav scroll effect ──────────────────────────────────────────────
+  // ── Nav scroll effect + back-to-top ───────────────────────────────
   const nav = document.getElementById('nav');
+  const backToTop = document.getElementById('backToTop');
   const onScroll = () => {
     nav.classList.toggle('scrolled', window.scrollY > 60);
+    if (backToTop) backToTop.classList.toggle('visible', window.scrollY > 500);
   };
   window.addEventListener('scroll', onScroll, { passive: true });
   onScroll();
+  backToTop?.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 
   // ── 햄버거 메뉴 ────────────────────────────────────────────────────
   const hamburger = document.getElementById('navHamburger');
@@ -158,9 +161,25 @@ document.addEventListener('DOMContentLoaded', () => {
   // ── "같이 가기 제안" buttons ─────────────────────────────────────
   document.querySelectorAll('.event-card__actions .btn--dark').forEach(btn => {
     btn.addEventListener('click', () => {
+      btn.textContent = '✓ 요청 전송됨';
+      btn.disabled = true;
       showToast('📱 부모님 앱으로 동의 요청을 보냈어요!');
+      setTimeout(() => { btn.textContent = '같이 가기 제안'; btn.disabled = false; }, 3000);
     });
   });
+
+  // ── Bento 동의 버튼 인터랙션 ─────────────────────────────────────
+  const svcYes = document.querySelector('.svc-consent-btn--yes');
+  const svcAlt = document.querySelector('.svc-consent-btn--alt');
+  const svcNo  = document.querySelector('.svc-consent-btn--no');
+  svcYes?.addEventListener('click', () => {
+    svcYes.textContent = '🎉 완료!';
+    svcYes.style.background = '#10b981';
+    showToast('🎉 부모님이 강릉 여행에 동의하셨어요! 예약이 시작됩니다.');
+    setTimeout(() => { svcYes.textContent = '좋아요, 가자!'; svcYes.style.background = ''; }, 3500);
+  });
+  svcAlt?.addEventListener('click', () => showToast('📅 날짜 변경 요청을 보냈어요.'));
+  svcNo?.addEventListener('click', () => showToast('다음 기회에 함께해요 😊'));
 
   // ── Kakao taxi demo ────────────────────────────────────────────────
   const kakaoBtn = document.getElementById('kakaoTaxiDemo');
