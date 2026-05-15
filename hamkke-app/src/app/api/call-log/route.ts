@@ -36,12 +36,13 @@ export async function POST(req: NextRequest) {
   const lastDate = lastLog ? new Date(lastLog.called_at).toISOString().slice(0, 10) : null
   const streakDay = lastLog && lastDate === yesterdayStr ? lastLog.streak_day + 1 : 1
 
-  await admin.from('call_logs').insert({
+  const { error: insertError } = await admin.from('call_logs').insert({
     family_link_id: familyLinkId,
     caller_id: user.id,
     duration_seconds: durationSeconds ?? null,
     streak_day: streakDay,
   })
+  if (insertError) return NextResponse.json({ error: '통화 기록 저장 실패' }, { status: 500 })
 
   // 가족 상대방에게 알림 생성
   const { data: link } = await admin

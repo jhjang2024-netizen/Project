@@ -19,18 +19,14 @@ export default async function CallPage() {
 
   const familyLinkId = familyLinks?.[0]?.id ?? null
 
-  const { data: callSettings } = await supabase
-    .from('call_settings')
-    .select('*')
-    .eq('family_link_id', familyLinkId ?? '')
-    .single()
-
-  const { data: callLogs } = await supabase
-    .from('call_logs')
-    .select('*')
-    .eq('family_link_id', familyLinkId ?? '')
-    .order('called_at', { ascending: false })
-    .limit(20)
+  const [{ data: callSettings }, { data: callLogs }] = await Promise.all([
+    familyLinkId
+      ? supabase.from('call_settings').select('*').eq('family_link_id', familyLinkId).single()
+      : Promise.resolve({ data: null }),
+    familyLinkId
+      ? supabase.from('call_logs').select('*').eq('family_link_id', familyLinkId).order('called_at', { ascending: false }).limit(20)
+      : Promise.resolve({ data: [] }),
+  ])
 
   return (
     <CallSettingsClient

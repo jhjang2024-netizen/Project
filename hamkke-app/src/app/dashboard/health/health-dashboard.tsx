@@ -27,6 +27,7 @@ export function HealthDashboard({ profile, partner, familyLinkId, healthRecords 
   const [showForm, setShowForm] = useState(false)
   const [values, setValues] = useState({ heart_rate: '', steps: '', oxygen_level: '', sleep_hours: '' })
   const [saving, setSaving] = useState(false)
+  const [saveError, setSaveError] = useState('')
 
   const latest = healthRecords[0]
 
@@ -34,7 +35,8 @@ export function HealthDashboard({ profile, partner, familyLinkId, healthRecords 
     e.preventDefault()
     if (!familyLinkId) return
     setSaving(true)
-    await fetch('/api/health-record', {
+    setSaveError('')
+    const res = await fetch('/api/health-record', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -46,6 +48,7 @@ export function HealthDashboard({ profile, partner, familyLinkId, healthRecords 
       }),
     })
     setSaving(false)
+    if (!res.ok) { const d = await res.json(); setSaveError(d.error ?? '저장 실패'); return }
     setShowForm(false)
     setValues({ heart_rate: '', steps: '', oxygen_level: '', sleep_hours: '' })
     window.location.reload()
@@ -89,6 +92,7 @@ export function HealthDashboard({ profile, partner, familyLinkId, healthRecords 
                   </div>
                 ))}
               </div>
+              {saveError && <div className="text-sm text-red-500 bg-red-50 rounded-xl px-4 py-3">{saveError}</div>}
               <div className="flex gap-2">
                 <Button type="submit" loading={saving} className="flex-1">저장</Button>
                 <Button type="button" variant="ghost" onClick={() => setShowForm(false)}>취소</Button>

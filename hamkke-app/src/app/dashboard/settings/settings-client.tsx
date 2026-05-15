@@ -27,8 +27,9 @@ export function SettingsClient({ profile, userEmail }: Props) {
     if (!profile) return
     setSaving(true)
     const supabase = createClient()
-    await supabase.from('profiles').update({ name, phone }).eq('id', profile.id)
+    const { error } = await supabase.from('profiles').update({ name, phone }).eq('id', profile.id)
     setSaving(false)
+    if (error) { setPwMsg('저장 실패: ' + error.message); return }
     setSaved(true)
     setTimeout(() => setSaved(false), 2000)
   }

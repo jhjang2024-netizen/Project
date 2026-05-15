@@ -30,7 +30,7 @@ export interface Activity {
   title: string
   description: string
   venue: string | null
-  date: string | null
+  activity_date: string | null
   price_estimate: number | null
   match_score: number | null
   status: 'suggested' | 'approved' | 'rejected' | 'completed'

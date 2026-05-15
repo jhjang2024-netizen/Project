@@ -19,12 +19,9 @@ export default async function HealthPage() {
 
   const familyLinkId = familyLinks?.[0]?.id ?? null
 
-  const { data: healthRecords } = await supabase
-    .from('health_records')
-    .select('*')
-    .eq('family_link_id', familyLinkId ?? '')
-    .order('recorded_at', { ascending: false })
-    .limit(30)
+  const { data: healthRecords } = familyLinkId
+    ? await supabase.from('health_records').select('*').eq('family_link_id', familyLinkId).order('recorded_at', { ascending: false }).limit(30)
+    : { data: [] }
 
   const partnerLink = familyLinks?.[0]
   const partner = partnerLink

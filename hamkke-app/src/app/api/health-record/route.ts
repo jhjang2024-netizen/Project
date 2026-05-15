@@ -12,14 +12,14 @@ export async function POST(req: NextRequest) {
 
   const admin = createAdminClient()
 
-  const { error } = await admin.from('health_records').insert({
+  const { error: insertError } = await admin.from('health_records').insert({
     family_link_id: familyLinkId,
     heart_rate: heartRate ?? null,
     steps: steps ?? null,
     oxygen_level: oxygenLevel ?? null,
     sleep_hours: sleepHours ?? null,
   })
-  if (error) return NextResponse.json({ error: '기록 실패' }, { status: 500 })
+  if (insertError) return NextResponse.json({ error: '기록 실패' }, { status: 500 })
 
   // 건강 이상 감지 → 가족에게 알림
   const alerts: string[] = []

@@ -41,12 +41,13 @@ export function CallSettingsClient({ familyLinkId, callSettings, callLogs }: Pro
     if (!familyLinkId) return
     setSaving(true)
     const supabase = createClient()
-    await supabase.from('call_settings').upsert({
+    const { error } = await supabase.from('call_settings').upsert({
       family_link_id: familyLinkId,
       notify_time: notifyTime,
       is_active: true,
     }, { onConflict: 'family_link_id' })
     setSaving(false)
+    if (error) { setLogMsg('저장 실패: ' + error.message); return }
     setSaved(true)
     setTimeout(() => setSaved(false), 2000)
   }

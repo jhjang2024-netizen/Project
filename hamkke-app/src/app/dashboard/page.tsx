@@ -5,22 +5,11 @@ export default async function DashboardPage() {
   const supabase = await createClient()
   const { data: { user } } = await supabase.auth.getUser()
 
-  let { data: profile } = await supabase
+  const { data: profile } = await supabase
     .from('profiles')
     .select('*')
     .eq('user_id', user!.id)
     .single()
-
-  if (!profile && user) {
-    const name = (user.user_metadata?.name as string) || user.email?.split('@')[0] || ''
-    const role = (user.user_metadata?.role as string) || 'child'
-    const { data: newProfile } = await supabase
-      .from('profiles')
-      .upsert({ user_id: user.id, name, role }, { onConflict: 'user_id' })
-      .select()
-      .single()
-    profile = newProfile
-  }
 
   const { data: familyLinks } = await supabase
     .from('family_links')
