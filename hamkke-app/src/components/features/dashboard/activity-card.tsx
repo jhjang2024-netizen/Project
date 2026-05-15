@@ -4,40 +4,41 @@ import { useState } from 'react'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import type { ActivityRecommendation } from '@/lib/claude/recommendations'
-import { createClient } from '@/lib/supabase/client'
-import { Check, X } from 'lucide-react'
+import { Check, X, Send } from 'lucide-react'
 
 interface Props {
   recommendation: ActivityRecommendation
   familyLinkId?: string
 }
 
-export function ActivityCard({ recommendation: rec, familyLinkId }: Props) {
-  const [status, setStatus] = useState<'idle' | 'saving' | 'saved' | 'rejected'>('idle')
+const TYPE_LABEL: Record<string, string> = {
+  movie: '영화', performance: '공연', restaurant: '맛집', travel: '여행', event: '행사',
+}
 
-  async function handleAction(action: 'approve' | 'reject') {
+export function ActivityCard({ recommendation: rec, familyLinkId }: Props) {
+  const [status, setStatus] = useState<'idle' | 'saving' | 'suggested' | 'dismissed'>('idle')
+
+  async function handleSuggest() {
     if (!familyLinkId) return
     setStatus('saving')
-    const supabase = createClient()
-    await supabase.from('activities').insert({
-      family_link_id: familyLinkId,
-      type: rec.type,
-      title: rec.title,
-      description: rec.description,
-      venue: rec.venue,
-      match_score: rec.matchScore,
-      ai_reason: rec.reason,
-      price_estimate: rec.priceEstimate,
-      status: action === 'approve' ? 'approved' : 'rejected',
+    const res = await fetch('/api/activities', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        family_link_id: familyLinkId,
+        type: rec.type,
+        title: rec.title,
+        description: rec.description,
+        venue: rec.venue,
+        match_score: rec.matchScore,
+        ai_reason: rec.reason,
+        price_estimate: rec.priceEstimate,
+      }),
     })
-    setStatus(action === 'approve' ? 'saved' : 'rejected')
+    setStatus(res.ok ? 'suggested' : 'idle')
   }
 
-  const typeLabel: Record<string, string> = {
-    movie: '영화', performance: '공연', restaurant: '맛집', travel: '여행', event: '행사'
-  }
-
-  if (status === 'rejected') return null
+  if (status === 'dismissed') return null
 
   return (
     <div className="bg-gray-50 rounded-xl p-4 border border-gray-100 flex flex-col gap-3">
@@ -56,17 +57,17 @@ export function ActivityCard({ recommendation: rec, familyLinkId }: Props) {
 
       <div className="flex items-center justify-between">
         <span className="text-xs text-gray-400">
-          {typeLabel[rec.type]} · 약 {rec.priceEstimate.toLocaleString('ko-KR')}원
+          {TYPE_LABEL[rec.type]} · 약 {rec.priceEstimate.toLocaleString('ko-KR')}원
         </span>
-        {status === 'saved' ? (
-          <Badge variant="success"><Check size={10} /> 저장됨</Badge>
+        {status === 'suggested' ? (
+          <Badge variant="info"><Send size={10} /> 제안됨</Badge>
         ) : (
           <div className="flex gap-1.5">
-            <Button variant="ghost" size="sm" onClick={() => handleAction('reject')} disabled={status === 'saving'}>
+            <Button variant="ghost" size="sm" onClick={() => setStatus('dismissed')} disabled={status === 'saving'}>
               <X size={12} />
             </Button>
-            <Button size="sm" onClick={() => handleAction('approve')} loading={status === 'saving'}>
-              <Check size={12} /> 저장
+            <Button size="sm" onClick={handleSuggest} loading={status === 'saving'}>
+              <Send size={12} /> 제안하기
             </Button>
           </div>
         )}

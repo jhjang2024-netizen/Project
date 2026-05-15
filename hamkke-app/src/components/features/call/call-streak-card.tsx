@@ -9,10 +9,12 @@ import { Phone } from 'lucide-react'
 interface Props {
   streakDay: number
   partnerName: string
+  familyLinkId: string
 }
 
-export function CallStreakCard({ streakDay, partnerName }: Props) {
+export function CallStreakCard({ streakDay, partnerName, familyLinkId }: Props) {
   const [showPopup, setShowPopup] = useState(false)
+  const [currentStreak, setCurrentStreak] = useState(streakDay)
 
   return (
     <>
@@ -21,15 +23,15 @@ export function CallStreakCard({ streakDay, partnerName }: Props) {
           <div className="flex items-center justify-between">
             <div>
               <div className="flex items-center gap-2 mb-1">
-                <span className="text-2xl">{streakDay > 0 ? '🔥' : '📞'}</span>
+                <span className="text-2xl">{currentStreak > 0 ? '🔥' : '📞'}</span>
                 <span className="text-sm font-semibold text-white/70">안부 전화</span>
               </div>
               <p className="text-3xl font-black">
-                {streakDay > 0 ? `${streakDay}일 연속` : '아직 기록 없음'}
+                {currentStreak > 0 ? `${currentStreak}일 연속` : '아직 기록 없음'}
               </p>
               <p className="text-sm text-white/55 mt-1">
-                {streakDay > 0
-                  ? `${partnerName}님과 ${streakDay}일째 연속 통화 중`
+                {currentStreak > 0
+                  ? `${partnerName}님과 ${currentStreak}일째 연속 통화 중`
                   : `${partnerName}님께 안부 전화를 드려보세요`}
               </p>
             </div>
@@ -49,7 +51,9 @@ export function CallStreakCard({ streakDay, partnerName }: Props) {
         isOpen={showPopup}
         onClose={() => setShowPopup(false)}
         partnerName={partnerName}
-        streakDay={streakDay}
+        streakDay={currentStreak}
+        familyLinkId={familyLinkId}
+        onCallComplete={(newStreak) => setCurrentStreak(newStreak)}
       />
     </>
   )

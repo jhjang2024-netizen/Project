@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import { useRouter } from 'next/navigation'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
@@ -15,6 +16,7 @@ interface Props {
 }
 
 export function CallSettingsClient({ familyLinkId, callSettings, callLogs }: Props) {
+  const router = useRouter()
   const [notifyTime, setNotifyTime] = useState(callSettings?.notify_time ?? '19:00')
   const [saving, setSaving] = useState(false)
   const [saved, setSaved] = useState(false)
@@ -86,7 +88,7 @@ export function CallSettingsClient({ familyLinkId, callSettings, callLogs }: Pro
         <Card className="border-dashed border-2 border-gray-200 bg-gray-50">
           <CardContent className="py-10 text-center">
             <p className="text-gray-500 text-sm">가족을 먼저 연결해야 알림을 설정할 수 있어요.</p>
-            <Button variant="ghost" size="sm" className="mt-3" onClick={() => window.location.href = '/dashboard/family'}>
+            <Button variant="ghost" size="sm" className="mt-3" onClick={() => router.push('/dashboard/family')}>
               가족 연결하기 →
             </Button>
           </CardContent>

@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import { useRouter } from 'next/navigation'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
@@ -15,6 +16,7 @@ interface Props {
 }
 
 export function FamilyClient({ profile, familyLinks }: Props) {
+  const router = useRouter()
   const [inviteCode, setInviteCode] = useState('')
   const [inputCode, setInputCode] = useState('')
   const [copied, setCopied] = useState(false)
@@ -71,7 +73,7 @@ export function FamilyClient({ profile, familyLinks }: Props) {
       status: 'accepted',
     })
     setConnecting(false)
-    window.location.reload()
+    router.refresh()
   }
 
   const accepted = familyLinks.filter(fl => fl.status === 'accepted')

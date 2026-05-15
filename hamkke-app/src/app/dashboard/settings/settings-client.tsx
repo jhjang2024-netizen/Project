@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import { useRouter } from 'next/navigation'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
@@ -14,6 +15,7 @@ interface Props {
 }
 
 export function SettingsClient({ profile, userEmail }: Props) {
+  const router = useRouter()
   const [name, setName] = useState(profile?.name ?? '')
   const [phone, setPhone] = useState(profile?.phone ?? '')
   const [saving, setSaving] = useState(false)
@@ -33,7 +35,7 @@ export function SettingsClient({ profile, userEmail }: Props) {
   async function handleLogout() {
     const supabase = createClient()
     await supabase.auth.signOut()
-    window.location.href = '/'
+    router.push('/')
   }
 
   return (

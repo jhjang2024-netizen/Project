@@ -21,25 +21,36 @@ export default async function DashboardPage() {
     .or(`child_id.eq.${profile?.id},parent_id.eq.${profile?.id}`)
     .eq('status', 'accepted')
 
-  const { data: recentActivities } = await supabase
-    .from('activities')
-    .select('*')
-    .in('family_link_id', (familyLinks ?? []).map(fl => fl.id))
-    .order('created_at', { ascending: false })
-    .limit(10)
+  const familyLinkIds = (familyLinks ?? []).map(fl => fl.id)
 
-  const { data: callLogs } = await supabase
-    .from('call_logs')
-    .select('*')
-    .in('family_link_id', (familyLinks ?? []).map(fl => fl.id))
-    .order('called_at', { ascending: false })
-    .limit(30)
+  const [{ data: recentActivities }, { data: suggestedActivities }, { data: callLogs }] =
+    await Promise.all([
+      supabase
+        .from('activities')
+        .select('*')
+        .in('family_link_id', familyLinkIds)
+        .order('created_at', { ascending: false })
+        .limit(10),
+      supabase
+        .from('activities')
+        .select('*')
+        .in('family_link_id', familyLinkIds)
+        .eq('status', 'suggested')
+        .order('created_at', { ascending: false }),
+      supabase
+        .from('call_logs')
+        .select('*')
+        .in('family_link_id', familyLinkIds)
+        .order('called_at', { ascending: false })
+        .limit(30),
+    ])
 
   return (
     <DashboardHome
       profile={profile}
       familyLinks={familyLinks ?? []}
       recentActivities={recentActivities ?? []}
+      suggestedActivities={suggestedActivities ?? []}
       callLogs={callLogs ?? []}
     />
   )

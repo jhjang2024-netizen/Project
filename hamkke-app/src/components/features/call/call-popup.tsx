@@ -9,13 +9,17 @@ interface Props {
   onClose: () => void
   partnerName: string
   streakDay: number
+  familyLinkId: string
+  onCallComplete?: (newStreakDay: number) => void
 }
 
 type Screen = 'alert' | 'calling' | 'done'
 
-export function CallPopup({ isOpen, onClose, partnerName, streakDay }: Props) {
+export function CallPopup({ isOpen, onClose, partnerName, streakDay, familyLinkId, onCallComplete }: Props) {
   const [screen, setScreen] = useState<Screen>('alert')
   const [callSeconds, setCallSeconds] = useState(0)
+  const [newStreakDay, setNewStreakDay] = useState(streakDay)
+  const [saving, setSaving] = useState(false)
 
   useEffect(() => {
     if (!isOpen) {
@@ -32,21 +36,34 @@ export function CallPopup({ isOpen, onClose, partnerName, streakDay }: Props) {
 
   if (!isOpen) return null
 
-  const formatTime = (s: number) => `${String(Math.floor(s / 60)).padStart(2, '0')}:${String(s % 60).padStart(2, '0')}`
+  const formatTime = (s: number) =>
+    `${String(Math.floor(s / 60)).padStart(2, '0')}:${String(s % 60).padStart(2, '0')}`
 
-  function handleCall() {
-    setScreen('calling')
-  }
-
-  function handleEnd() {
-    setScreen('done')
+  async function handleEnd() {
+    setSaving(true)
+    try {
+      const res = await fetch('/api/call-logs', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ family_link_id: familyLinkId, duration_seconds: callSeconds }),
+      })
+      const data = await res.json()
+      const streak = data.streakDay ?? streakDay + 1
+      setNewStreakDay(streak)
+      onCallComplete?.(streak)
+    } catch {
+      setNewStreakDay(streakDay + 1)
+    } finally {
+      setSaving(false)
+      setScreen('done')
+    }
   }
 
   return (
     <div className="fixed inset-0 z-50 flex items-end justify-center sm:items-center p-4 bg-black/50 backdrop-blur-sm">
       <div className="w-full max-w-sm bg-white rounded-3xl shadow-2xl overflow-hidden">
         {screen === 'alert' && (
-          <div className="p-8 text-center space-y-6">
+          <div className="p-8 text-center space-y-6 relative">
             <button onClick={onClose} className="absolute top-4 right-4 text-gray-400 hover:text-gray-600">
               <X size={20} />
             </button>
@@ -60,10 +77,8 @@ export function CallPopup({ isOpen, onClose, partnerName, streakDay }: Props) {
               </p>
             </div>
             <div className="flex gap-3">
-              <Button variant="ghost" className="flex-1" onClick={onClose}>
-                취소
-              </Button>
-              <Button className="flex-1" onClick={handleCall}>
+              <Button variant="ghost" className="flex-1" onClick={onClose}>취소</Button>
+              <Button className="flex-1" onClick={() => setScreen('calling')}>
                 <Phone size={16} />
                 전화하기
               </Button>
@@ -85,8 +100,9 @@ export function CallPopup({ isOpen, onClose, partnerName, streakDay }: Props) {
               variant="secondary"
               className="w-16 h-16 rounded-full mx-auto flex items-center justify-center bg-red-500 hover:bg-red-600 text-white border-0"
               onClick={handleEnd}
+              loading={saving}
             >
-              <PhoneOff size={24} />
+              {!saving && <PhoneOff size={24} />}
             </Button>
           </div>
         )}
@@ -100,13 +116,11 @@ export function CallPopup({ isOpen, onClose, partnerName, streakDay }: Props) {
                 {partnerName}님과 {formatTime(callSeconds)} 통화했어요.
               </p>
               <div className="bg-orange-50 rounded-2xl py-4 px-6 mt-4">
-                <p className="text-3xl font-black text-orange-500">{streakDay + 1}일 연속</p>
+                <p className="text-3xl font-black text-orange-500">{newStreakDay}일 연속</p>
                 <p className="text-xs text-orange-400 mt-1">연속 통화 기록 달성!</p>
               </div>
             </div>
-            <Button className="w-full" onClick={onClose}>
-              확인
-            </Button>
+            <Button className="w-full" onClick={onClose}>확인</Button>
           </div>
         )}
       </div>

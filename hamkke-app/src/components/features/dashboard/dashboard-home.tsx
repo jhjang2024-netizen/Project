@@ -5,19 +5,21 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { ActivityCard } from './activity-card'
+import { ParentApprovals } from './parent-approvals'
 import { CallStreakCard } from '../call/call-streak-card'
 import type { Profile, FamilyLink, Activity, CallLog } from '@/types'
 import type { ActivityRecommendation } from '@/lib/claude/recommendations'
-import { Sparkles, Users, RefreshCw } from 'lucide-react'
+import { Sparkles, RefreshCw } from 'lucide-react'
 
 interface Props {
   profile: Profile | null
   familyLinks: FamilyLink[]
   recentActivities: Activity[]
+  suggestedActivities: Activity[]
   callLogs: CallLog[]
 }
 
-export function DashboardHome({ profile, familyLinks, recentActivities, callLogs }: Props) {
+export function DashboardHome({ profile, familyLinks, recentActivities, suggestedActivities, callLogs }: Props) {
   const [recommendations, setRecommendations] = useState<ActivityRecommendation[]>([])
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
@@ -28,6 +30,11 @@ export function DashboardHome({ profile, familyLinks, recentActivities, callLogs
     : null
 
   const currentStreak = callLogs.length > 0 ? callLogs[0].streak_day : 0
+  const isParent = profile?.role === 'parent'
+
+  const recentTypes = recentActivities.slice(0, 5).map(a =>
+    ({ movie: '영화', performance: '공연', restaurant: '맛집', travel: '여행', event: '행사' })[a.type]
+  ).filter(Boolean) as string[]
 
   async function fetchRecommendations() {
     if (!profile || !partner) return
@@ -40,7 +47,7 @@ export function DashboardHome({ profile, familyLinks, recentActivities, callLogs
         body: JSON.stringify({
           childName: profile.role === 'child' ? profile.name : partner.name,
           parentName: profile.role === 'parent' ? profile.name : partner.name,
-          preferences: ['영화', '한식', '가족여행'],
+          preferences: recentTypes.length ? recentTypes : ['영화', '한식', '가족여행'],
         }),
       })
       const data = await res.json()
@@ -64,6 +71,9 @@ export function DashboardHome({ profile, familyLinks, recentActivities, callLogs
         <h1 className="text-2xl font-black tracking-tight text-gray-900 mt-0.5">
           {profile?.name ?? ''}님
         </h1>
+        {isParent && (
+          <p className="text-xs text-orange-500 font-semibold mt-0.5">부모님 계정</p>
+        )}
       </div>
 
       {/* 가족 연결 없을 때 */}
@@ -72,7 +82,9 @@ export function DashboardHome({ profile, familyLinks, recentActivities, callLogs
           <CardContent className="pt-6 text-center py-10">
             <div className="text-4xl mb-3">👨‍👩‍👧</div>
             <p className="font-bold text-gray-900 mb-1">가족을 연결해 보세요</p>
-            <p className="text-sm text-gray-500 mb-4">부모님과 연결하면 AI 추천이 시작됩니다.</p>
+            <p className="text-sm text-gray-500 mb-4">
+              {isParent ? '자녀와 연결하면 활동 제안을 받을 수 있어요.' : '부모님과 연결하면 AI 추천이 시작됩니다.'}
+            </p>
             <Button href="/dashboard/family" variant="ghost" size="sm">가족 연결하기 →</Button>
           </CardContent>
         </Card>
@@ -80,11 +92,20 @@ export function DashboardHome({ profile, familyLinks, recentActivities, callLogs
 
       {/* 안부 전화 스트릭 */}
       {partner && (
-        <CallStreakCard streakDay={currentStreak} partnerName={partner.name} />
+        <CallStreakCard
+          streakDay={currentStreak}
+          partnerName={partner.name}
+          familyLinkId={partnerLink.id}
+        />
       )}
 
-      {/* AI 추천 섹션 */}
-      {partner && (
+      {/* 부모님: 승인 대기 활동 */}
+      {isParent && suggestedActivities.length > 0 && (
+        <ParentApprovals activities={suggestedActivities} />
+      )}
+
+      {/* 자녀: AI 추천 섹션 */}
+      {!isParent && partner && (
         <Card>
           <CardHeader className="pb-4">
             <div className="flex items-center justify-between">
@@ -102,11 +123,9 @@ export function DashboardHome({ profile, familyLinks, recentActivities, callLogs
                 {recommendations.length ? '새로 받기' : '추천 받기'}
               </Button>
             </div>
-            {partner && (
-              <p className="text-xs text-gray-400 mt-1">
-                {profile?.name}님과 {partner.name}님의 취향을 분석했어요
-              </p>
-            )}
+            <p className="text-xs text-gray-400 mt-1">
+              {profile?.name}님과 {partner.name}님의 취향을 분석해요 · 마음에 들면 부모님께 제안해보세요
+            </p>
           </CardHeader>
           <CardContent>
             {error && (
@@ -128,7 +147,7 @@ export function DashboardHome({ profile, familyLinks, recentActivities, callLogs
             {recommendations.length > 0 && !loading && (
               <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                 {recommendations.map((rec, i) => (
-                  <ActivityCard key={i} recommendation={rec} familyLinkId={familyLinks[0]?.id} />
+                  <ActivityCard key={i} recommendation={rec} familyLinkId={partnerLink?.id} />
                 ))}
               </div>
             )}
@@ -136,15 +155,26 @@ export function DashboardHome({ profile, familyLinks, recentActivities, callLogs
         </Card>
       )}
 
+      {/* 부모님: 대신 간단한 안내 */}
+      {isParent && partner && suggestedActivities.length === 0 && (
+        <Card className="border-dashed border-2 border-gray-100 bg-gray-50/50">
+          <CardContent className="py-10 text-center">
+            <div className="text-3xl mb-3">✨</div>
+            <p className="font-semibold text-gray-700 mb-1">{partner.name}님의 제안을 기다리는 중이에요</p>
+            <p className="text-sm text-gray-400">자녀가 활동을 제안하면 여기서 확인하고 수락할 수 있어요</p>
+          </CardContent>
+        </Card>
+      )}
+
       {/* 최근 활동 */}
-      {recentActivities.length > 0 && (
+      {recentActivities.filter(a => a.status !== 'suggested').length > 0 && (
         <Card>
           <CardHeader>
             <CardTitle>최근 활동</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="space-y-3">
-              {recentActivities.slice(0, 5).map(act => (
+              {recentActivities.filter(a => a.status !== 'suggested').slice(0, 5).map(act => (
                 <div key={act.id} className="flex items-center gap-3 py-2 border-b border-gray-50 last:border-0">
                   <div className="text-xl">
                     {act.type === 'movie' ? '🎬' : act.type === 'performance' ? '🎭' :
@@ -155,7 +185,7 @@ export function DashboardHome({ profile, familyLinks, recentActivities, callLogs
                     <p className="text-xs text-gray-400">{act.venue}</p>
                   </div>
                   <Badge variant={act.status === 'approved' ? 'success' : act.status === 'rejected' ? 'danger' : 'default'}>
-                    {act.status === 'approved' ? '승인됨' : act.status === 'rejected' ? '거절' : '제안됨'}
+                    {act.status === 'approved' ? '수락됨' : act.status === 'rejected' ? '거절됨' : '완료'}
                   </Badge>
                 </div>
               ))}
