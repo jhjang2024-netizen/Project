@@ -25,17 +25,28 @@ export default function SignupPage() {
     setLoading(true)
     setError('')
     const supabase = createClient()
-    const { error } = await supabase.auth.signUp({
-      email,
-      password,
-      options: { data: { name, role } },
-    })
-    if (error) {
-      setError(error.message)
-      setLoading(false)
-    } else {
+    try {
+      const { data, error } = await supabase.auth.signUp({
+        email,
+        password,
+        options: { data: { name, role } },
+      })
+      if (error) {
+        setError(error.message)
+        setLoading(false)
+        return
+      }
+      // 이메일 인증이 필요한 경우 (session이 null)
+      if (!data.session) {
+        setError('가입 확인 이메일을 발송했습니다. 이메일을 확인한 후 로그인해 주세요.')
+        setLoading(false)
+        return
+      }
       router.push('/dashboard')
       router.refresh()
+    } catch (err: unknown) {
+      setError(err instanceof Error ? err.message : '알 수 없는 오류가 발생했습니다.')
+      setLoading(false)
     }
   }
 
