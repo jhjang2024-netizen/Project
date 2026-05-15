@@ -1,10 +1,9 @@
 -- ============================================================
--- 함께 앱 Supabase 스키마
+-- 함께 앱 Supabase 스키마 (idempotent — 여러 번 실행 가능)
 -- Supabase SQL Editor 에서 실행하세요
 -- ============================================================
 
--- 프로필 테이블
-create table public.profiles (
+create table if not exists public.profiles (
   id uuid primary key default gen_random_uuid(),
   user_id uuid references auth.users(id) on delete cascade not null unique,
   name text not null,
@@ -16,8 +15,7 @@ create table public.profiles (
   created_at timestamptz default now() not null
 );
 
--- 가족 연결 테이블
-create table public.family_links (
+create table if not exists public.family_links (
   id uuid primary key default gen_random_uuid(),
   child_id uuid references public.profiles(id) on delete cascade not null,
   parent_id uuid references public.profiles(id) on delete cascade not null,
@@ -27,8 +25,7 @@ create table public.family_links (
   unique(child_id, parent_id)
 );
 
--- 활동 추천 테이블
-create table public.activities (
+create table if not exists public.activities (
   id uuid primary key default gen_random_uuid(),
   family_link_id uuid references public.family_links(id) on delete cascade not null,
   type text not null check (type in ('movie','performance','restaurant','travel','event')),
@@ -43,8 +40,7 @@ create table public.activities (
   created_at timestamptz default now() not null
 );
 
--- 안부 전화 설정 테이블
-create table public.call_settings (
+create table if not exists public.call_settings (
   id uuid primary key default gen_random_uuid(),
   family_link_id uuid references public.family_links(id) on delete cascade not null unique,
   notify_time time not null default '19:00',
@@ -52,8 +48,7 @@ create table public.call_settings (
   created_at timestamptz default now() not null
 );
 
--- 안부 전화 기록 테이블
-create table public.call_logs (
+create table if not exists public.call_logs (
   id uuid primary key default gen_random_uuid(),
   family_link_id uuid references public.family_links(id) on delete cascade not null,
   caller_id uuid references auth.users(id) on delete cascade not null,
@@ -62,8 +57,7 @@ create table public.call_logs (
   called_at timestamptz default now() not null
 );
 
--- 건강 기록 테이블
-create table public.health_records (
+create table if not exists public.health_records (
   id uuid primary key default gen_random_uuid(),
   family_link_id uuid references public.family_links(id) on delete cascade not null,
   heart_rate integer check (heart_rate between 30 and 250),
@@ -73,8 +67,7 @@ create table public.health_records (
   recorded_at timestamptz default now() not null
 );
 
--- 알림 테이블
-create table public.notifications (
+create table if not exists public.notifications (
   id uuid primary key default gen_random_uuid(),
   user_id uuid references auth.users(id) on delete cascade not null,
   type text not null check (type in ('call_reminder','activity_request','health_alert','family_invite')),
@@ -96,7 +89,19 @@ alter table public.call_logs       enable row level security;
 alter table public.health_records  enable row level security;
 alter table public.notifications   enable row level security;
 
--- profiles: 본인만 읽기/수정
+-- policies (drop & recreate so re-running is safe)
+drop policy if exists "profiles_select"       on public.profiles;
+drop policy if exists "profiles_insert"       on public.profiles;
+drop policy if exists "profiles_update"       on public.profiles;
+drop policy if exists "family_links_select"   on public.family_links;
+drop policy if exists "family_links_insert"   on public.family_links;
+drop policy if exists "family_links_update"   on public.family_links;
+drop policy if exists "activities_all"        on public.activities;
+drop policy if exists "call_settings_family"  on public.call_settings;
+drop policy if exists "call_logs_family"      on public.call_logs;
+drop policy if exists "health_records_family" on public.health_records;
+drop policy if exists "notifications_own"     on public.notifications;
+
 create policy "profiles_select" on public.profiles for select using (
   auth.uid() = user_id or
   id in (
@@ -108,7 +113,6 @@ create policy "profiles_select" on public.profiles for select using (
 create policy "profiles_insert" on public.profiles for insert with check (auth.uid() = user_id);
 create policy "profiles_update" on public.profiles for update using (auth.uid() = user_id);
 
--- family_links: 본인이 포함된 링크만
 create policy "family_links_select" on public.family_links for select using (
   child_id  = (select id from public.profiles where user_id = auth.uid()) or
   parent_id = (select id from public.profiles where user_id = auth.uid())
@@ -122,7 +126,6 @@ create policy "family_links_update" on public.family_links for update using (
   parent_id = (select id from public.profiles where user_id = auth.uid())
 );
 
--- activities: 가족 링크에 속한 사람만
 create policy "activities_all" on public.activities using (
   family_link_id in (
     select id from public.family_links
@@ -131,7 +134,6 @@ create policy "activities_all" on public.activities using (
   )
 );
 
--- call_settings / call_logs / health_records / notifications
 create policy "call_settings_family" on public.call_settings using (
   family_link_id in (
     select id from public.family_links
@@ -166,11 +168,13 @@ begin
     new.id,
     coalesce(new.raw_user_meta_data->>'name', split_part(new.email, '@', 1)),
     coalesce(new.raw_user_meta_data->>'role', 'child')
-  );
+  )
+  on conflict (user_id) do nothing;
   return new;
 end;
 $$;
 
+drop trigger if exists on_auth_user_created on auth.users;
 create trigger on_auth_user_created
   after insert on auth.users
   for each row execute procedure public.handle_new_user();
