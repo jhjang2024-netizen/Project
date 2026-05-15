@@ -1,4 +1,5 @@
 import { createClient } from '@/lib/supabase/server'
+import { createAdminClient } from '@/lib/supabase/admin'
 import { redirect } from 'next/navigation'
 
 interface Props {
@@ -52,14 +53,33 @@ export default async function InvitePage({ params }: Props) {
     )
   }
 
-  const childId = profile?.role === 'child' ? profile.id : target.id
-  const parentId = profile?.role === 'parent' ? profile.id : target.id
+  const childId = profile?.role === 'child' ? profile!.id : target.id
+  const parentId = profile?.role === 'parent' ? profile!.id : target.id
 
-  await supabase.from('family_links').insert({
+  const admin = createAdminClient()
+  await admin.from('family_links').insert({
     child_id: childId,
     parent_id: parentId,
     status: 'accepted',
   })
+
+  // 양쪽에 알림 생성
+  await admin.from('notifications').insert([
+    {
+      user_id: user.id,
+      type: 'family_invite',
+      title: '가족 연결 완료!',
+      body: `${target.name}님과 연결됐습니다.`,
+      data: {},
+    },
+    {
+      user_id: target.user_id,
+      type: 'family_invite',
+      title: '가족 연결 완료!',
+      body: `${profile?.name}님과 연결됐습니다.`,
+      data: {},
+    },
+  ])
 
   redirect('/dashboard/family')
 }

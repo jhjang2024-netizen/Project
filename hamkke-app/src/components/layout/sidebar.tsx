@@ -17,7 +17,7 @@ const navItems = [
   { href: '/dashboard/notifications', icon: Bell,  label: '알림' },
 ]
 
-export function Sidebar() {
+export function Sidebar({ unreadCount = 0 }: { unreadCount?: number }) {
   const pathname = usePathname()
   const router = useRouter()
 
@@ -53,7 +53,14 @@ export function Sidebar() {
                   : 'text-white/60 hover:bg-white/8 hover:text-white/90'
               )}
             >
-              <Icon size={18} />
+              <span className="relative">
+                <Icon size={18} />
+                {href === '/dashboard/notifications' && unreadCount > 0 && (
+                  <span className="absolute -top-1.5 -right-1.5 w-4 h-4 bg-orange-500 rounded-full text-[10px] font-bold flex items-center justify-center">
+                    {unreadCount > 9 ? '9+' : unreadCount}
+                  </span>
+                )}
+              </span>
               {label}
             </Link>
           )

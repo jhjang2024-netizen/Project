@@ -8,13 +8,19 @@ export default async function DashboardLayout({ children }: { children: React.Re
   const { data: { user } } = await supabase.auth.getUser()
   if (!user) redirect('/login')
 
+  const { count: unreadCount } = await supabase
+    .from('notifications')
+    .select('*', { count: 'exact', head: true })
+    .eq('user_id', user.id)
+    .eq('read', false)
+
   return (
     <div className="flex h-screen overflow-hidden">
-      <Sidebar />
+      <Sidebar unreadCount={unreadCount ?? 0} />
       <main className="flex-1 overflow-y-auto bg-gray-50 pb-20 md:pb-0">
         {children}
       </main>
-      <MobileNav />
+      <MobileNav unreadCount={unreadCount ?? 0} />
     </div>
   )
 }

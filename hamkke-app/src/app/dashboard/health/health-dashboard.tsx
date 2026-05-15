@@ -4,7 +4,6 @@ import { useState } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
-import { createClient } from '@/lib/supabase/client'
 import type { Profile, HealthRecord } from '@/types'
 import { Heart, Activity, Wind, Moon, Plus } from 'lucide-react'
 
@@ -35,13 +34,16 @@ export function HealthDashboard({ profile, partner, familyLinkId, healthRecords 
     e.preventDefault()
     if (!familyLinkId) return
     setSaving(true)
-    const supabase = createClient()
-    await supabase.from('health_records').insert({
-      family_link_id: familyLinkId,
-      heart_rate: values.heart_rate ? Number(values.heart_rate) : null,
-      steps: values.steps ? Number(values.steps) : null,
-      oxygen_level: values.oxygen_level ? Number(values.oxygen_level) : null,
-      sleep_hours: values.sleep_hours ? Number(values.sleep_hours) : null,
+    await fetch('/api/health-record', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        familyLinkId,
+        heartRate: values.heart_rate ? Number(values.heart_rate) : null,
+        steps: values.steps ? Number(values.steps) : null,
+        oxygenLevel: values.oxygen_level ? Number(values.oxygen_level) : null,
+        sleepHours: values.sleep_hours ? Number(values.sleep_hours) : null,
+      }),
     })
     setSaving(false)
     setShowForm(false)

@@ -40,5 +40,23 @@ export async function POST(req: NextRequest) {
   })
   if (error) return NextResponse.json({ error: '연결에 실패했습니다.' }, { status: 500 })
 
+  // 양쪽에 알림 생성
+  await admin.from('notifications').insert([
+    {
+      user_id: user.id,
+      type: 'family_invite',
+      title: '가족 연결 완료!',
+      body: `${targetProfile.name}님과 연결됐습니다.`,
+      data: {},
+    },
+    {
+      user_id: targetProfile.user_id,
+      type: 'family_invite',
+      title: '가족 연결 완료!',
+      body: `${myProfile.name}님과 연결됐습니다.`,
+      data: {},
+    },
+  ])
+
   return NextResponse.json({ success: true })
 }

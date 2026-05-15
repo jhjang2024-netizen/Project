@@ -18,6 +18,24 @@ export function CallSettingsClient({ familyLinkId, callSettings, callLogs }: Pro
   const [notifyTime, setNotifyTime] = useState(callSettings?.notify_time ?? '19:00')
   const [saving, setSaving] = useState(false)
   const [saved, setSaved] = useState(false)
+  const [logging, setLogging] = useState(false)
+  const [logMsg, setLogMsg] = useState('')
+
+  async function handleLogCall() {
+    if (!familyLinkId) return
+    setLogging(true)
+    setLogMsg('')
+    const res = await fetch('/api/call-log', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ familyLinkId }),
+    })
+    const data = await res.json()
+    setLogging(false)
+    if (!res.ok) { setLogMsg(data.error); return }
+    setLogMsg(`${data.streakDay}일 연속 통화 기록 완료! 🔥`)
+    setTimeout(() => { setLogMsg(''); window.location.reload() }, 1500)
+  }
 
   async function handleSave() {
     if (!familyLinkId) return
@@ -57,6 +75,23 @@ export function CallSettingsClient({ familyLinkId, callSettings, callLogs }: Pro
           </div>
         </CardContent>
       </Card>
+
+      {/* 통화 기록 버튼 */}
+      {familyLinkId && (
+        <Card>
+          <CardContent className="pt-6 space-y-3">
+            <p className="text-sm text-gray-500">오늘 부모님과 통화했나요? 기록해 두세요.</p>
+            {logMsg && (
+              <div className={`text-sm rounded-xl px-4 py-3 ${logMsg.includes('완료') ? 'text-green-700 bg-green-50' : 'text-red-500 bg-red-50'}`}>
+                {logMsg}
+              </div>
+            )}
+            <Button onClick={handleLogCall} loading={logging} className="w-full" size="lg">
+              📞 오늘 통화했어요
+            </Button>
+          </CardContent>
+        </Card>
+      )}
 
       {/* 알림 설정 */}
       {familyLinkId ? (

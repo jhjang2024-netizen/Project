@@ -5,6 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Badge } from '@/components/ui/badge'
+import { createClient } from '@/lib/supabase/client'
 import type { Profile, FamilyLink } from '@/types'
 import { Users, Copy, Check, Link2 } from 'lucide-react'
 
