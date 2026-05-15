@@ -11,14 +11,17 @@ export default async function DashboardLayout({ children }: { children: React.Re
 
   const admin = createAdminClient()
 
-  // 프로필 없으면 admin으로 생성 (RLS 우회)
+  // 프로필 없거나 이름 비어있으면 admin으로 생성/업데이트 (RLS 우회)
   const { data: profile } = await admin
-    .from('profiles').select('id').eq('user_id', user.id).single()
+    .from('profiles').select('id, name').eq('user_id', user.id).single()
+
+  const nameFromMeta = (user.user_metadata?.name as string) || user.email?.split('@')[0] || ''
+  const roleFromMeta = (user.user_metadata?.role as string) || 'child'
 
   if (!profile) {
-    const name = (user.user_metadata?.name as string) || user.email?.split('@')[0] || ''
-    const role = (user.user_metadata?.role as string) || 'child'
-    await admin.from('profiles').upsert({ user_id: user.id, name, role }, { onConflict: 'user_id' })
+    await admin.from('profiles').insert({ user_id: user.id, name: nameFromMeta, role: roleFromMeta })
+  } else if (!profile.name || profile.name.trim() === '') {
+    await admin.from('profiles').update({ name: nameFromMeta }).eq('user_id', user.id)
   }
 
   const { count: unreadCount } = await admin
