@@ -1,53 +1,36 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useTransition } from 'react'
 import Link from 'next/link'
-import { useRouter } from 'next/navigation'
-import { createClient } from '@/lib/supabase/client'
+import { signUpAction } from './actions'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import type { UserRole } from '@/types'
 
 export default function SignupPage() {
-  const router = useRouter()
   const [step, setStep] = useState<1 | 2>(1)
   const [role, setRole] = useState<UserRole>('child')
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
+  const [message, setMessage] = useState('')
+  const [isPending, startTransition] = useTransition()
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
     if (step === 1) { setStep(2); return }
 
-    setLoading(true)
     setError('')
-    const supabase = createClient()
-    try {
-      const { data, error } = await supabase.auth.signUp({
-        email,
-        password,
-        options: { data: { name, role } },
-      })
-      if (error) {
-        setError(error.message)
-        setLoading(false)
-        return
+    setMessage('')
+    startTransition(async () => {
+      const result = await signUpAction({ email, password, name, role })
+      if (result?.error) {
+        setError(result.error)
+      } else if (result?.message) {
+        setMessage(result.message)
       }
-      // 이메일 인증이 필요한 경우 (session이 null)
-      if (!data.session) {
-        setError('가입 확인 이메일을 발송했습니다. 이메일을 확인한 후 로그인해 주세요.')
-        setLoading(false)
-        return
-      }
-      router.push('/dashboard')
-      router.refresh()
-    } catch (err: unknown) {
-      setError(err instanceof Error ? err.message : '알 수 없는 오류가 발생했습니다.')
-      setLoading(false)
-    }
+    })
   }
 
   return (
@@ -105,9 +88,10 @@ export default function SignupPage() {
                 <Input id="email" type="email" label="이메일" placeholder="example@email.com" value={email} onChange={e => setEmail(e.target.value)} required autoComplete="email" />
                 <Input id="password" type="password" label="비밀번호" placeholder="8자 이상 입력" value={password} onChange={e => setPassword(e.target.value)} required minLength={8} autoComplete="new-password" />
                 {error && <div className="text-sm text-red-500 bg-red-50 rounded-xl px-4 py-3">{error}</div>}
+                {message && <div className="text-sm text-blue-600 bg-blue-50 rounded-xl px-4 py-3">{message}</div>}
                 <div className="flex gap-2">
-                  <Button type="button" variant="ghost" size="lg" className="flex-1" onClick={() => setStep(1)}>← 이전</Button>
-                  <Button type="submit" loading={loading} size="lg" className="flex-1">가입 완료</Button>
+                  <Button type="button" variant="ghost" size="lg" className="flex-1" onClick={() => setStep(1)} disabled={isPending}>← 이전</Button>
+                  <Button type="submit" loading={isPending} size="lg" className="flex-1">가입 완료</Button>
                 </div>
               </>
             )}

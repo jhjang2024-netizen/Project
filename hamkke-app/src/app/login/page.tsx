@@ -1,32 +1,26 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useTransition } from 'react'
 import Link from 'next/link'
-import { useRouter } from 'next/navigation'
-import { createClient } from '@/lib/supabase/client'
+import { loginAction } from './actions'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 
 export default function LoginPage() {
-  const router = useRouter()
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
+  const [isPending, startTransition] = useTransition()
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
-    setLoading(true)
     setError('')
-    const supabase = createClient()
-    const { error } = await supabase.auth.signInWithPassword({ email, password })
-    if (error) {
-      setError('이메일 또는 비밀번호가 올바르지 않습니다.')
-      setLoading(false)
-    } else {
-      router.push('/dashboard')
-      router.refresh()
-    }
+    startTransition(async () => {
+      const result = await loginAction({ email, password })
+      if (result?.error) {
+        setError(result.error)
+      }
+    })
   }
 
   return (
@@ -69,7 +63,7 @@ export default function LoginPage() {
               </div>
             )}
 
-            <Button type="submit" loading={loading} className="w-full" size="lg">
+            <Button type="submit" loading={isPending} className="w-full" size="lg">
               로그인
             </Button>
           </form>
