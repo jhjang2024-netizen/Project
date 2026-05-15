@@ -50,7 +50,14 @@ export default function SignupPage() {
       router.push('/dashboard')
       router.refresh()
     } catch (err: unknown) {
-      setError(err instanceof Error ? err.message : '알 수 없는 오류가 발생했습니다.')
+      const msg = err instanceof Error ? err.message : String(err)
+      if (msg.includes('환경변수')) {
+        setError('서버 설정 오류입니다. 관리자에게 문의해 주세요.')
+      } else if (msg.includes('Unexpected end of JSON') || msg.includes('Failed to fetch') || msg.includes('json')) {
+        setError('서버에 연결할 수 없습니다. 잠시 후 다시 시도해 주세요.')
+      } else {
+        setError(msg)
+      }
       setLoading(false)
     }
   }
