@@ -47,6 +47,11 @@ export default function SignupPage() {
         setLoading(false)
         return
       }
+      await supabase.from('profiles').upsert({
+        user_id: data.user!.id,
+        name,
+        role,
+      }, { onConflict: 'user_id' })
       router.push('/dashboard')
       router.refresh()
     } catch (err: unknown) {
