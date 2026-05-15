@@ -17,6 +17,7 @@ export default function SignupPage() {
   const [password, setPassword] = useState('')
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
+  const [success, setSuccess] = useState('')
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
@@ -24,6 +25,7 @@ export default function SignupPage() {
 
     setLoading(true)
     setError('')
+    setSuccess('')
     const supabase = createClient()
     try {
       const { data, error } = await supabase.auth.signUp({
@@ -32,13 +34,16 @@ export default function SignupPage() {
         options: { data: { name, role } },
       })
       if (error) {
-        setError(error.message)
+        if (error.message.toLowerCase().includes('already registered') || error.message.toLowerCase().includes('already been registered')) {
+          setError('이미 가입된 이메일입니다. 로그인하거나 비밀번호 찾기를 이용해 주세요.')
+        } else {
+          setError(error.message)
+        }
         setLoading(false)
         return
       }
-      // 이메일 인증이 필요한 경우 (session이 null)
       if (!data.session) {
-        setError('가입 확인 이메일을 발송했습니다. 이메일을 확인한 후 로그인해 주세요.')
+        setSuccess('가입 확인 이메일을 발송했습니다. 받은편지함을 확인한 후 로그인해 주세요.')
         setLoading(false)
         return
       }
@@ -105,6 +110,7 @@ export default function SignupPage() {
                 <Input id="email" type="email" label="이메일" placeholder="example@email.com" value={email} onChange={e => setEmail(e.target.value)} required autoComplete="email" />
                 <Input id="password" type="password" label="비밀번호" placeholder="8자 이상 입력" value={password} onChange={e => setPassword(e.target.value)} required minLength={8} autoComplete="new-password" />
                 {error && <div className="text-sm text-red-500 bg-red-50 rounded-xl px-4 py-3">{error}</div>}
+                {success && <div className="text-sm text-green-700 bg-green-50 rounded-xl px-4 py-3">{success}</div>}
                 <div className="flex gap-2">
                   <Button type="button" variant="ghost" size="lg" className="flex-1" onClick={() => setStep(1)}>← 이전</Button>
                   <Button type="submit" loading={loading} size="lg" className="flex-1">가입 완료</Button>
