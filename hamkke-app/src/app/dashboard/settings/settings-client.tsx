@@ -6,7 +6,7 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { createClient } from '@/lib/supabase/client'
 import type { Profile } from '@/types'
-import { User, LogOut, ChevronRight } from 'lucide-react'
+import { User, LogOut, ChevronRight, Lock } from 'lucide-react'
 
 interface Props {
   profile: Profile | null
@@ -18,6 +18,9 @@ export function SettingsClient({ profile, userEmail }: Props) {
   const [phone, setPhone] = useState(profile?.phone ?? '')
   const [saving, setSaving] = useState(false)
   const [saved, setSaved] = useState(false)
+  const [newPassword, setNewPassword] = useState('')
+  const [pwSaving, setPwSaving] = useState(false)
+  const [pwMsg, setPwMsg] = useState('')
 
   async function handleSave(e: React.FormEvent) {
     e.preventDefault()
@@ -28,6 +31,20 @@ export function SettingsClient({ profile, userEmail }: Props) {
     setSaving(false)
     setSaved(true)
     setTimeout(() => setSaved(false), 2000)
+  }
+
+  async function handlePasswordChange(e: React.FormEvent) {
+    e.preventDefault()
+    if (newPassword.length < 8) { setPwMsg('비밀번호는 8자 이상이어야 합니다.'); return }
+    setPwSaving(true)
+    setPwMsg('')
+    const supabase = createClient()
+    const { error } = await supabase.auth.updateUser({ password: newPassword })
+    setPwSaving(false)
+    if (error) { setPwMsg('변경 실패: ' + error.message); return }
+    setNewPassword('')
+    setPwMsg('비밀번호가 변경되었습니다.')
+    setTimeout(() => setPwMsg(''), 3000)
   }
 
   async function handleLogout() {
@@ -71,6 +88,34 @@ export function SettingsClient({ profile, userEmail }: Props) {
                 역할: {profile?.role === 'child' ? '자녀' : '부모님'}
               </span>
             </div>
+          </form>
+        </CardContent>
+      </Card>
+
+      {/* 비밀번호 변경 */}
+      <Card>
+        <CardHeader>
+          <div className="flex items-center gap-2">
+            <Lock size={18} className="text-gray-500" />
+            <CardTitle>비밀번호 변경</CardTitle>
+          </div>
+        </CardHeader>
+        <CardContent>
+          <form onSubmit={handlePasswordChange} className="space-y-4">
+            <Input
+              type="password"
+              placeholder="새 비밀번호 (8자 이상)"
+              value={newPassword}
+              onChange={e => setNewPassword(e.target.value)}
+              minLength={8}
+              autoComplete="new-password"
+            />
+            {pwMsg && (
+              <div className={`text-sm rounded-xl px-4 py-3 ${pwMsg.includes('실패') ? 'text-red-500 bg-red-50' : 'text-green-700 bg-green-50'}`}>
+                {pwMsg}
+              </div>
+            )}
+            <Button type="submit" loading={pwSaving} disabled={!newPassword}>변경</Button>
           </form>
         </CardContent>
       </Card>

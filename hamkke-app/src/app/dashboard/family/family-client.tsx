@@ -5,7 +5,6 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Badge } from '@/components/ui/badge'
-import { createClient } from '@/lib/supabase/client'
 import type { Profile, FamilyLink } from '@/types'
 import { Users, Copy, Check, Link2 } from 'lucide-react'
 
@@ -42,34 +41,17 @@ export function FamilyClient({ profile, familyLinks }: Props) {
     if (!profile || !inputCode.trim()) return
     setConnecting(true)
     setError('')
-    const supabase = createClient()
-
-    const { data: targetProfile, error: findErr } = await supabase
-      .from('profiles')
-      .select('*')
-      .eq('invite_code', inputCode.trim().toUpperCase())
-      .single()
-
-    if (findErr || !targetProfile) {
-      setError('유효하지 않은 초대 코드예요.')
-      setConnecting(false)
-      return
-    }
-
-    if (targetProfile.role === profile.role) {
-      setError('같은 역할(부모/자녀)끼리는 연결할 수 없어요.')
-      setConnecting(false)
-      return
-    }
-
-    const childId = profile.role === 'child' ? profile.id : targetProfile.id
-    const parentId = profile.role === 'parent' ? profile.id : targetProfile.id
-
-    await supabase.from('family_links').insert({
-      child_id: childId,
-      parent_id: parentId,
-      status: 'accepted',
+    const res = await fetch('/api/family-link', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ inviteCode: inputCode.trim() }),
     })
+    const data = await res.json()
+    if (!res.ok) {
+      setError(data.error ?? '연결에 실패했습니다.')
+      setConnecting(false)
+      return
+    }
     setConnecting(false)
     window.location.reload()
   }

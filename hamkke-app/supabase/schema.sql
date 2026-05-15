@@ -114,7 +114,8 @@ create policy "family_links_select" on public.family_links for select using (
   parent_id = (select id from public.profiles where user_id = auth.uid())
 );
 create policy "family_links_insert" on public.family_links for insert with check (
-  child_id = (select id from public.profiles where user_id = auth.uid())
+  child_id  = (select id from public.profiles where user_id = auth.uid()) or
+  parent_id = (select id from public.profiles where user_id = auth.uid())
 );
 create policy "family_links_update" on public.family_links for update using (
   child_id  = (select id from public.profiles where user_id = auth.uid()) or
