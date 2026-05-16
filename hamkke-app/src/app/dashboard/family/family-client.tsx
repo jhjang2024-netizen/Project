@@ -5,7 +5,6 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Badge } from '@/components/ui/badge'
-import { createClient } from '@/lib/supabase/client'
 import type { Profile, FamilyLink } from '@/types'
 import { Users, Copy, Check, Link2, PhoneCall } from 'lucide-react'
 
@@ -23,15 +22,12 @@ export function FamilyClient({ profile, familyLinks }: Props) {
   const [generating, setGenerating] = useState(false)
 
   async function generateCode() {
-    if (!profile) { setError('프로필을 불러오는 중입니다. 페이지를 새로고침해 주세요.'); return }
     setGenerating(true)
     setError('')
-    const code = Math.random().toString(36).substring(2, 8).toUpperCase()
-    const supabase = createClient()
-    const { error: updateError } = await supabase
-      .from('profiles').update({ invite_code: code }).eq('id', profile.id)
-    if (updateError) { setError('코드 생성 실패: ' + updateError.message); setGenerating(false); return }
-    setInviteCode(code)
+    const res = await fetch('/api/invite-code', { method: 'POST' })
+    const data = await res.json()
+    if (!res.ok) { setError('코드 생성 실패: ' + (data.error ?? '알 수 없는 오류')); setGenerating(false); return }
+    setInviteCode(data.code)
     setGenerating(false)
   }
 
