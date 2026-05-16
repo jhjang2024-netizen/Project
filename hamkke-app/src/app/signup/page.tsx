@@ -3,7 +3,6 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
-import { createClient } from '@/lib/supabase/client'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import type { UserRole } from '@/types'
@@ -26,39 +25,28 @@ export default function SignupPage() {
     setLoading(true)
     setError('')
     setSuccess('')
-    const supabase = createClient()
     try {
-      const { data, error } = await supabase.auth.signUp({
-        email,
-        password,
-        options: { data: { name, role } },
+      const res = await fetch('/api/auth/signup', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password, name, role }),
       })
-      if (error) {
-        if (error.message.toLowerCase().includes('already registered') || error.message.toLowerCase().includes('already been registered')) {
-          setError('이미 가입된 이메일입니다. 로그인하거나 비밀번호 찾기를 이용해 주세요.')
-        } else {
-          setError(error.message)
-        }
+      const data = await res.json()
+      if (!res.ok) {
+        setError(data.error ?? '가입에 실패했습니다.')
         setLoading(false)
         return
       }
-      if (!data.session) {
+      if (data.requiresConfirmation) {
         setSuccess('가입 확인 이메일을 발송했습니다. 받은편지함을 확인한 후 로그인해 주세요.')
         setLoading(false)
         return
       }
-      await supabase.from('profiles').upsert({
-        user_id: data.user!.id,
-        name,
-        role,
-      }, { onConflict: 'user_id' })
       router.push('/dashboard')
       router.refresh()
     } catch (err: unknown) {
       const msg = err instanceof Error ? err.message : String(err)
-      if (msg.includes('환경변수')) {
-        setError('서버 설정 오류입니다. 관리자에게 문의해 주세요.')
-      } else if (msg.includes('Unexpected end of JSON') || msg.includes('Failed to fetch') || msg.includes('json')) {
+      if (msg.includes('Failed to fetch') || msg.includes('json')) {
         setError('서버에 연결할 수 없습니다. 잠시 후 다시 시도해 주세요.')
       } else {
         setError(msg)
