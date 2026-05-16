@@ -4,7 +4,6 @@ import { useState } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
-import { createClient } from '@/lib/supabase/client'
 import type { CallLog, CallSettings } from '@/types'
 import { Phone, Bell, Flame } from 'lucide-react'
 
@@ -40,14 +39,13 @@ export function CallSettingsClient({ familyLinkId, callSettings, callLogs }: Pro
   async function handleSave() {
     if (!familyLinkId) return
     setSaving(true)
-    const supabase = createClient()
-    const { error } = await supabase.from('call_settings').upsert({
-      family_link_id: familyLinkId,
-      notify_time: notifyTime,
-      is_active: true,
-    }, { onConflict: 'family_link_id' })
+    const res = await fetch('/api/call-settings', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ familyLinkId, notifyTime }),
+    })
     setSaving(false)
-    if (error) { setLogMsg('저장 실패: ' + error.message); return }
+    if (!res.ok) { const d = await res.json(); setLogMsg('저장 실패: ' + (d.error ?? '')); return }
     setSaved(true)
     setTimeout(() => setSaved(false), 2000)
   }

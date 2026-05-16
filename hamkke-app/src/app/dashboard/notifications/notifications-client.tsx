@@ -4,7 +4,6 @@ import { useState } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
-import { createClient } from '@/lib/supabase/client'
 import type { Profile, Notification } from '@/types'
 import { Bell, Phone, Heart, Users, Sparkles } from 'lucide-react'
 
@@ -24,16 +23,22 @@ export function NotificationsClient({ notifications }: Props) {
   const [items, setItems] = useState(notifications)
 
   async function markRead(id: string) {
-    const supabase = createClient()
-    await supabase.from('notifications').update({ read: true }).eq('id', id)
+    await fetch('/api/notifications', {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ ids: [id] }),
+    })
     setItems(prev => prev.map(n => n.id === id ? { ...n, read: true } : n))
   }
 
   async function markAllRead() {
-    const supabase = createClient()
     const unreadIds = items.filter(n => !n.read).map(n => n.id)
     if (!unreadIds.length) return
-    await supabase.from('notifications').update({ read: true }).in('id', unreadIds)
+    await fetch('/api/notifications', {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ ids: unreadIds }),
+    })
     setItems(prev => prev.map(n => ({ ...n, read: true })))
   }
 
